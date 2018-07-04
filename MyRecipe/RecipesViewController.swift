@@ -8,10 +8,11 @@
 
 import UIKit
 
-class RecipesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class RecipesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
     
     //MARK: Properties
     var isCooking: Bool!
+    var isIngridientOn: Bool!
     @IBOutlet weak var selectionTitle: UILabel!
     @IBOutlet weak var backgroundView: UIView!
     @IBOutlet weak var xibWrapView: UIView!
@@ -20,7 +21,8 @@ class RecipesViewController: UIViewController, UITableViewDataSource, UITableVie
     @IBOutlet weak var bottomButtonStack: UIStackView!
     @IBOutlet weak var timerButton: UIButton!
     @IBOutlet weak var ingridientsButton: UIButton!
-    @IBOutlet weak var backButton: UIButton!
+    @IBOutlet weak var ingridientsCollectionWrapView: UIView!
+    @IBOutlet weak var ingridientsCollectionView: UICollectionView!
     var bglayer: CAGradientLayer!
     var arrayOfRecipes: [Recipe]!
     var recipe: Recipe!
@@ -42,6 +44,10 @@ class RecipesViewController: UIViewController, UITableViewDataSource, UITableVie
         self.prepareUI()
         self.tableView.estimatedRowHeight = 120
         self.TIMER_ON = false
+        self.isIngridientOn = false
+        self.recipe = DataManager.getEmptyOfRecipes()
+        self.ingridientsCollectionWrapView.alpha = 0
+        self.ingridientsCollectionView.alpha = 0
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -137,6 +143,19 @@ class RecipesViewController: UIViewController, UITableViewDataSource, UITableVie
             self.tableView.scrollToRow(at: scrollIndex, at: UITableViewScrollPosition.top, animated: true)
         }
     }
+    
+    //MARK: CollectionView
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return self.recipe.ingridients.count
+    }
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! IngridientCell
+        cell.name.text = self.recipe.ingridients[indexPath.row]
+        return cell
+    }
 
     //MARK: IBAction
     @IBAction func backTapped(_ sender: UIButton) {
@@ -147,6 +166,23 @@ class RecipesViewController: UIViewController, UITableViewDataSource, UITableVie
     @IBAction func newRecipeTapped(_ sender: UIButton) {
     }
     @IBAction func ingridientsTapped(_ sender: UIButton) {
+        if !self.isIngridientOn {
+            self.isIngridientOn = true
+            self.ingridientsCollectionView.reloadData()
+            UIView.animate(withDuration: 0.5, animations: {
+                self.ingridientsCollectionView.alpha = 1
+                self.ingridientsCollectionWrapView.alpha = 1
+                self.ingridientsButton.backgroundColor = UIColor.init(red: 246/255, green: 133/255, blue: 148/255, alpha: 1.0)
+            })
+        }
+        else{
+            self.isIngridientOn = false
+            UIView.animate(withDuration: 0.5, animations: {
+                self.ingridientsCollectionView.alpha = 0
+                self.ingridientsCollectionWrapView.alpha = 0
+                self.ingridientsButton.backgroundColor = UIColor.init(red: 56/255, green: 56/255, blue: 56/255, alpha: 1.0)
+            })
+        }
     }
     @IBAction func timerTapped(_ sender: UIButton) {
         self.presentTimerPopUp()
@@ -192,9 +228,7 @@ class RecipesViewController: UIViewController, UITableViewDataSource, UITableVie
             self.timer?.invalidate()
             self.timer = nil
             self.timerButton.backgroundColor = UIColor.init(red: 56/255, green: 56/255, blue: 56/255, alpha: 1.0)
-            self.timerButton.setTitleColor(UIColor.init(red: 255/255, green: 255/255, blue: 255/255, alpha: 1.0), for: .normal)
-//            self.timerImage.image = UIImage.init(named: "icon_timerOFF")
-//            self.timerImage.alpha = 0.6
+//            self.timerButton.setTitleColor(UIColor.init(red: 255/255, green: 255/255, blue: 255/255, alpha: 1.0), for: .normal)
             self.timerButton.setTitle("Timer", for: .normal)
             self.TIMER_ON = false
         }
@@ -292,5 +326,13 @@ class CookingCell: UITableViewCell {
         self.circleView.layer.borderColor = UIColor.init(red: 244/255, green: 146/255, blue: 158/255, alpha: 1.0).cgColor
         self.circleView.layer.cornerRadius = self.circleView.frame.height/2
     }
-    
+
 }
+
+class IngridientCell: UICollectionViewCell {
+    @IBOutlet weak var name: UILabel!
+}
+
+
+
+

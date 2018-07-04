@@ -323,6 +323,50 @@
                                             <constraint firstAttribute="width" constant="335" id="B2N-PF-5C6"/>
                                         </constraints>
                                     </stackView>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Uzq-nn-NSQ">
+                                        <rect key="frame" x="8" y="64" width="335" height="499"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <subviews>
+                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="VQp-Fj-SuJ">
+                                                <rect key="frame" x="8" y="8" width="319" height="483"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Inw-wu-SkZ">
+                                                    <size key="itemSize" width="319" height="46"/>
+                                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                </collectionViewFlowLayout>
+                                                <cells>
+                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="LpB-Xf-9EL" customClass="IngridientCell" customModule="MyRecipe" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="0.0" width="319" height="46"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                                            <rect key="frame" x="0.0" y="0.0" width="319" height="46"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1 tsp ground cumin" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jfp-vt-JPY">
+                                                                    <rect key="frame" x="20" y="8" width="279" height="31"/>
+                                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                    <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="18"/>
+                                                                    <color key="textColor" red="0.92941176470588238" green="0.65490196078431373" blue="0.55686274509803924" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                            </subviews>
+                                                        </view>
+                                                        <connections>
+                                                            <outlet property="name" destination="jfp-vt-JPY" id="Ypg-dU-BqN"/>
+                                                        </connections>
+                                                    </collectionViewCell>
+                                                </cells>
+                                                <connections>
+                                                    <outlet property="dataSource" destination="Y3a-lH-8hN" id="GQ9-iN-gCt"/>
+                                                    <outlet property="delegate" destination="Y3a-lH-8hN" id="Sq2-IF-y3W"/>
+                                                </connections>
+                                            </collectionView>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.99519230769230771" green="0.99038461538461542" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -362,6 +406,8 @@
                         <outlet property="backgroundView" destination="6m3-Qp-j3b" id="9Nj-rm-Vc5"/>
                         <outlet property="bottomButtonStack" destination="fFY-0f-AKN" id="u73-WI-ycU"/>
                         <outlet property="ingridientsButton" destination="jv5-rF-ezD" id="LfL-HM-0XX"/>
+                        <outlet property="ingridientsCollectionView" destination="VQp-Fj-SuJ" id="kuu-T9-v8r"/>
+                        <outlet property="ingridientsCollectionWrapView" destination="Uzq-nn-NSQ" id="i4t-8L-IhP"/>
                         <outlet property="newRecipeButton" destination="Mut-s0-PRI" id="NGE-wN-fha"/>
                         <outlet property="selectionTitle" destination="zPn-2F-iuV" id="xaO-69-6KD"/>
                         <outlet property="tableView" destination="wEw-Fx-r4H" id="V8U-rH-OTx"/>

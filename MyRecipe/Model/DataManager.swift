@@ -24,5 +24,9 @@ class DataManager: NSObject {
         return [recipe1,recipe2,recipe3]
     }
     
+    class func getEmptyOfRecipes() -> Recipe{
+        return Recipe.init(name: "", cookingTime: 0, briefDescription: "", ingridients: [""], steps: [""], FAVORITE: false, COOKED: false, cookedCount: 0, photos: [Data.init()], dateAdded: Date.init(), tags: [""])
+    }
+    
 }
 
