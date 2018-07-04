@@ -8,13 +8,12 @@
 
 import UIKit
 
-class MainViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class MainViewController: UIViewController {
     //MARK: Properties
     var bglayer: CAGradientLayer!
     @IBOutlet weak var backgroundView: UIView!
     @IBOutlet weak var titleWrapView: UIView!
     @IBOutlet weak var xibWrapView: UIView!
-    @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var selectionTitle: UILabel!
     var arrayOfTitles: [String]!
     var arrayOfIMGNames: [String]!
@@ -22,8 +21,6 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func viewDidLoad() {
         super.viewDidLoad()
         self.prepareUI()
-        self.arrayOfTitles = ["Recipes", "New Recipe","Favourites", "Search"]
-        self.arrayOfIMGNames = ["icon_book","icon_plus","icon_heartFull","icon_search"]
     }
     
     func prepareUI(){
@@ -43,31 +40,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.titleWrapView.layer.cornerRadius = 40
     }
     
-    //MARK: TableView
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
-    }
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "CellMenu") as! MenuCell
-        cell.name.text = self.arrayOfTitles[indexPath.row]
-        cell.icon.image = UIImage.init(named: self.arrayOfIMGNames[indexPath.row])
-        return cell
-    }
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
-    }
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch indexPath.row {
-        case 0:
-            let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "RecipesViewController") as! RecipesViewController
-            self.present(vc, animated: true, completion: nil)
-        default:
-            break
-        }
-    }
+
     
    
 
