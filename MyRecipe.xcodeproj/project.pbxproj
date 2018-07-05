@@ -14,6 +14,10 @@
 		7E6C27E020ED531700209258 /* TimerPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6C27DF20ED531700209258 /* TimerPopUp.swift */; };
 		7E6C27E220ED541E00209258 /* GrayLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6C27E120ED541E00209258 /* GrayLayer.swift */; };
 		7E6C27E420ED542700209258 /* GrayLayer.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E6C27E320ED542700209258 /* GrayLayer.xib */; };
+		7E6C27E620EE8B4D00209258 /* SignSignUp.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E6C27E520EE8B4D00209258 /* SignSignUp.storyboard */; };
+		7E6C27E820EE8BA700209258 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6C27E720EE8BA700209258 /* SignInViewController.swift */; };
+		7E6C27EA20EE96B400209258 /* ColorBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6C27E920EE96B400209258 /* ColorBackgroundView.swift */; };
+		7E6C27EC20EE984B00209258 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6C27EB20EE984B00209258 /* SignUpViewController.swift */; };
 		7EA3F41020EBE5F5001B0756 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA3F40F20EBE5F5001B0756 /* AppDelegate.swift */; };
 		7EA3F41520EBE5F5001B0756 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7EA3F41320EBE5F5001B0756 /* Main.storyboard */; };
 		7EA3F41720EBE5F5001B0756 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7EA3F41620EBE5F5001B0756 /* Assets.xcassets */; };
@@ -50,6 +54,10 @@
 		7E6C27DF20ED531700209258 /* TimerPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerPopUp.swift; sourceTree = "<group>"; };
 		7E6C27E120ED541E00209258 /* GrayLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrayLayer.swift; sourceTree = "<group>"; };
 		7E6C27E320ED542700209258 /* GrayLayer.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GrayLayer.xib; sourceTree = "<group>"; };
+		7E6C27E520EE8B4D00209258 /* SignSignUp.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SignSignUp.storyboard; sourceTree = "<group>"; };
+		7E6C27E720EE8BA700209258 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		7E6C27E920EE96B400209258 /* ColorBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorBackgroundView.swift; sourceTree = "<group>"; };
+		7E6C27EB20EE984B00209258 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		7EA3F40C20EBE5F5001B0756 /* MyRecipe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyRecipe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EA3F40F20EBE5F5001B0756 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7EA3F41420EBE5F5001B0756 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -116,11 +124,14 @@
 			isa = PBXGroup;
 			children = (
 				7EA3F40F20EBE5F5001B0756 /* AppDelegate.swift */,
+				7E6C27E720EE8BA700209258 /* SignInViewController.swift */,
+				7E6C27EB20EE984B00209258 /* SignUpViewController.swift */,
 				7EA3F44020EBE762001B0756 /* MainViewController.swift */,
 				7E08D96E20EC12A3002F68D8 /* RecipesViewController.swift */,
 				7EA3F44920EC09BE001B0756 /* CustomViews */,
 				7EA3F43F20EBE67A001B0756 /* Model */,
 				7EA3F44420EC05B5001B0756 /* Xib */,
+				7E6C27E520EE8B4D00209258 /* SignSignUp.storyboard */,
 				7EA3F41320EBE5F5001B0756 /* Main.storyboard */,
 				7EA3F41820EBE5F5001B0756 /* LaunchScreen.storyboard */,
 				7EA3F41620EBE5F5001B0756 /* Assets.xcassets */,
@@ -171,6 +182,7 @@
 		7EA3F44920EC09BE001B0756 /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
+				7E6C27E920EE96B400209258 /* ColorBackgroundView.swift */,
 				7EA3F44720EC09B7001B0756 /* MenuCell.swift */,
 			);
 			path = CustomViews;
@@ -286,6 +298,7 @@
 				7E6C27DE20ED508D00209258 /* TimerPopUp.xib in Resources */,
 				7E6C27E420ED542700209258 /* GrayLayer.xib in Resources */,
 				7EA3F41A20EBE5F5001B0756 /* LaunchScreen.storyboard in Resources */,
+				7E6C27E620EE8B4D00209258 /* SignSignUp.storyboard in Resources */,
 				7EA3F41720EBE5F5001B0756 /* Assets.xcassets in Resources */,
 				7EA3F41520EBE5F5001B0756 /* Main.storyboard in Resources */,
 			);
@@ -312,14 +325,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7E6C27EA20EE96B400209258 /* ColorBackgroundView.swift in Sources */,
 				7E6C27E020ED531700209258 /* TimerPopUp.swift in Sources */,
 				7EA3F44120EBE762001B0756 /* MainViewController.swift in Sources */,
 				7EA3F41020EBE5F5001B0756 /* AppDelegate.swift in Sources */,
 				7E6C27E220ED541E00209258 /* GrayLayer.swift in Sources */,
 				7EA3F44820EC09B7001B0756 /* MenuCell.swift in Sources */,
+				7E6C27EC20EE984B00209258 /* SignUpViewController.swift in Sources */,
 				7E08D97320EC14B8002F68D8 /* DataManager.swift in Sources */,
 				7E08D97120EC1499002F68D8 /* Recipe.swift in Sources */,
 				7E08D96F20EC12A3002F68D8 /* RecipesViewController.swift in Sources */,
+				7E6C27E820EE8BA700209258 /* SignInViewController.swift in Sources */,
 				7EA3F43E20EBE666001B0756 /* Color.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
