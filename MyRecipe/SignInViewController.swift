@@ -53,6 +53,9 @@ class SignInViewController: UIViewController {
     
     //MARK: IBActions
     @IBAction func loginTapped(_ sender: Any) {
+        let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "MainViewController")
+        self.present(vc, animated: true, completion: nil)
+        
     }
     @IBAction func signUpTapped(_ sender: Any) {
     }
