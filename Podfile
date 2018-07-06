@@ -8,6 +8,9 @@ target 'MyRecipe' do
   # Pods for MyRecipe
 
 pod 'Firebase/Core'
+pod 'Firebase/Auth'
+pod 'Firebase/Database'
+pod 'Firebase/Storage'
 
   target 'MyRecipeTests' do
     inherit! :search_paths

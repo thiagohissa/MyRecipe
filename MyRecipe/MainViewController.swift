@@ -15,8 +15,10 @@ class MainViewController: UIViewController {
     @IBOutlet weak var titleWrapView: UIView!
     @IBOutlet weak var xibWrapView: UIView!
     @IBOutlet weak var selectionTitle: UILabel!
+    @IBOutlet weak var usernameLabel: UILabel!
     var arrayOfTitles: [String]!
     var arrayOfIMGNames: [String]!
+    var username: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,6 +40,11 @@ class MainViewController: UIViewController {
         self.xibWrapView.layer.mask = shape
         // Title Wrap Edge
         self.titleWrapView.layer.cornerRadius = 40
+        
+        if self.username == nil {
+            self.username = "Hi Kristy"
+        }
+        self.usernameLabel.text = self.username
     }
     
 

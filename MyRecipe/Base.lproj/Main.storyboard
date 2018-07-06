@@ -132,6 +132,7 @@
                         <outlet property="backgroundView" destination="Ym9-dT-58w" id="gPs-qS-A94"/>
                         <outlet property="selectionTitle" destination="iRh-ff-8xz" id="diT-OY-keR"/>
                         <outlet property="titleWrapView" destination="Jad-Yg-8vI" id="ZK3-X0-4fQ"/>
+                        <outlet property="usernameLabel" destination="CPE-12-IR2" id="87B-6I-lmI"/>
                         <outlet property="xibWrapView" destination="Zbd-QS-M0j" id="RTo-AX-cgY"/>
                     </connections>
                 </viewController>

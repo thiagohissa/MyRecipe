@@ -15,6 +15,7 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var rePasswordTextField: UITextField!
+    @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var doneButton: UIButton!
     
     override func viewDidLoad() {
@@ -37,12 +38,20 @@ class SignUpViewController: UIViewController {
         border3.borderColor = UIColor.white.cgColor
         border3.frame = CGRect(x: 0, y: emailTextField.frame.size.height - 1.0, width: emailTextField.frame.size.width, height: emailTextField.frame.size.height)
         border3.borderWidth = 1.0
+        let border4 = CALayer()
+        border4.borderColor = UIColor.white.cgColor
+        border4.frame = CGRect(x: 0, y: emailTextField.frame.size.height - 1.0, width: emailTextField.frame.size.width, height: emailTextField.frame.size.height)
+        border4.borderWidth = 1.0
         self.emailTextField.layer.addSublayer(border1)
         self.emailTextField.layer.masksToBounds = true
         self.passwordTextField.layer.addSublayer(border2)
         self.passwordTextField.layer.masksToBounds = true
         self.rePasswordTextField.layer.addSublayer(border3)
         self.rePasswordTextField.layer.masksToBounds = true
+        self.nameTextField.layer.addSublayer(border4)
+        self.nameTextField.layer.masksToBounds = true
+        self.nameTextField.attributedPlaceholder = NSAttributedString(string: "First Name",
+                                                                            attributes: [NSAttributedStringKey.foregroundColor: UIColor.white])
         self.emailTextField.attributedPlaceholder = NSAttributedString(string: "Email",
                                                                        attributes: [NSAttributedStringKey.foregroundColor: UIColor.white])
         self.passwordTextField.attributedPlaceholder = NSAttributedString(string: "Password",
@@ -58,6 +67,32 @@ class SignUpViewController: UIViewController {
     }
     
     @IBAction func doneTapped(_ sender: Any) {
+        if self.nameTextField.text?.isEmpty ?? false || self.emailTextField.text?.isEmpty ?? false || self.passwordTextField.text?.isEmpty ?? false || self.rePasswordTextField.text?.isEmpty ?? false {
+            print("SignUp - Textfields Incomplete")
+        }
+        else if !(self.emailTextField.text?.contains("@"))!{
+            print("SignUp - Wrong email format")
+        }
+        else if self.passwordTextField.text != self.rePasswordTextField.text{
+            print("SignUp - Passwords don't match")
+        }
+        else if self.passwordTextField.text == self.rePasswordTextField.text {
+            let email = self.emailTextField.text!
+            let password = self.passwordTextField.text!
+            let username = self.nameTextField.text!
+            BackendManager.createUserFor(email: email, password: password, username: username, completion: { (uid, error) in
+                if error == nil && uid != nil {
+                    print("SignUp - Proceeding to MainViewController")
+                    BackendManager.saveUserInitialValues(name: username, uid: uid!)
+                    let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateInitialViewController() as! MainViewController
+                    vc.username = "Hi \(username)"
+                    self.present(vc, animated: true, completion: nil)
+                }
+                else{
+                    print("SignUp - Error detected: \(String(describing: error?.localizedDescription))")
+                }
+            })
+        }
     }
     
 
