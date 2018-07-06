@@ -17,12 +17,22 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var rePasswordTextField: UITextField!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var doneButton: UIButton!
+    let alertSheet = AlertSheetView.instanceFromNib() as! AlertSheetView
+    let grayview = GrayLayer.instanceFromNib()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.titleWrap.layer.cornerRadius = 40
         self.doneButton.layer.cornerRadius = 20
         self.prepareUI()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        NotificationCenter.default.addObserver(self, selector: #selector(receivedNotificationToRemoveTimerPopUp), name: NSNotification.Name(rawValue: "REMOVE_ALERT_NOTIFICATION"), object: nil)
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "REMOVE_ALERT_NOTIFICATION"), object: nil)
     }
     
     func prepareUI(){
@@ -90,10 +100,34 @@ class SignUpViewController: UIViewController {
                 }
                 else{
                     print("SignUp - Error detected: \(String(describing: error?.localizedDescription))")
+                    self.presentAlert(title: "ERROR", message: "\(String(describing: error?.localizedDescription))")
                 }
             })
         }
     }
     
+    //MARK: Alert
+    func presentAlert(title: String, message: String){
+        self.alertSheet.center.x = self.view.center.x
+        self.alertSheet.center.y = 800
+        self.view.addSubview(self.grayview)
+        self.view.addSubview(self.alertSheet)
+        self.alertSheet.titleLabel.text = title
+        self.alertSheet.messageLabel.text = message
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 5.0, initialSpringVelocity: 3, options: UIViewAnimationOptions.curveEaseIn, animations: {
+            self.alertSheet.center.y = self.view.frame.height - (self.alertSheet.frame.height/2) - 20
+        }, completion: nil)
+    }
+    
+    @objc func receivedNotificationToRemoveTimerPopUp() {
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 5.0, initialSpringVelocity: 3, options: UIViewAnimationOptions.curveEaseIn, animations: {
+            self.alertSheet.center.y = 1200
+        }, completion: nil)
+        DispatchQueue.main.asyncAfter(deadline: .now()+0.1) {
+            self.alertSheet.removeFromSuperview()
+            self.grayview.removeFromSuperview()
+            self.tabBarController?.tabBar.isHidden = false
+        }
+    }
 
 }

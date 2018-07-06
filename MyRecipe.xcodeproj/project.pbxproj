@@ -24,6 +24,8 @@
 		7E6C27EF20EFACED00209258 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7E6C27ED20EFACEC00209258 /* GoogleService-Info.plist */; };
 		7E6C27F020EFACED00209258 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7E6C27ED20EFACEC00209258 /* GoogleService-Info.plist */; };
 		7E98DEF420EFB0CB001EDD61 /* BackendManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E98DEF320EFB0CB001EDD61 /* BackendManager.swift */; };
+		7E98DEF620EFC330001EDD61 /* AlertSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E98DEF520EFC330001EDD61 /* AlertSheet.xib */; };
+		7E98DEF820EFC426001EDD61 /* AlertSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E98DEF720EFC426001EDD61 /* AlertSheetView.swift */; };
 		7EA3F41020EBE5F5001B0756 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA3F40F20EBE5F5001B0756 /* AppDelegate.swift */; };
 		7EA3F41520EBE5F5001B0756 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7EA3F41320EBE5F5001B0756 /* Main.storyboard */; };
 		7EA3F41720EBE5F5001B0756 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7EA3F41620EBE5F5001B0756 /* Assets.xcassets */; };
@@ -71,6 +73,8 @@
 		7E6C27EB20EE984B00209258 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		7E6C27ED20EFACEC00209258 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7E98DEF320EFB0CB001EDD61 /* BackendManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackendManager.swift; sourceTree = "<group>"; };
+		7E98DEF520EFC330001EDD61 /* AlertSheet.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlertSheet.xib; sourceTree = "<group>"; };
+		7E98DEF720EFC426001EDD61 /* AlertSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertSheetView.swift; sourceTree = "<group>"; };
 		7EA3F40C20EBE5F5001B0756 /* MyRecipe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyRecipe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EA3F40F20EBE5F5001B0756 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7EA3F41420EBE5F5001B0756 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -196,9 +200,11 @@
 		7EA3F44420EC05B5001B0756 /* Xib */ = {
 			isa = PBXGroup;
 			children = (
+				7E98DEF520EFC330001EDD61 /* AlertSheet.xib */,
 				7E6C27DD20ED508D00209258 /* TimerPopUp.xib */,
-				7E6C27DF20ED531700209258 /* TimerPopUp.swift */,
 				7E6C27E320ED542700209258 /* GrayLayer.xib */,
+				7E98DEF720EFC426001EDD61 /* AlertSheetView.swift */,
+				7E6C27DF20ED531700209258 /* TimerPopUp.swift */,
 				7E6C27E120ED541E00209258 /* GrayLayer.swift */,
 			);
 			path = Xib;
@@ -352,6 +358,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7E98DEF620EFC330001EDD61 /* AlertSheet.xib in Resources */,
 				7E6C27DE20ED508D00209258 /* TimerPopUp.xib in Resources */,
 				7E6C27E420ED542700209258 /* GrayLayer.xib in Resources */,
 				7EA3F41A20EBE5F5001B0756 /* LaunchScreen.storyboard in Resources */,
@@ -546,6 +553,7 @@
 				7EA3F44120EBE762001B0756 /* MainViewController.swift in Sources */,
 				7E98DEF420EFB0CB001EDD61 /* BackendManager.swift in Sources */,
 				7EA3F41020EBE5F5001B0756 /* AppDelegate.swift in Sources */,
+				7E98DEF820EFC426001EDD61 /* AlertSheetView.swift in Sources */,
 				7E6C27E220ED541E00209258 /* GrayLayer.swift in Sources */,
 				7EA3F44820EC09B7001B0756 /* MenuCell.swift in Sources */,
 				7E6C27EC20EE984B00209258 /* SignUpViewController.swift in Sources */,
