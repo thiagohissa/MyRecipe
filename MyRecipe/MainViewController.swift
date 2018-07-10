@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MainViewController: UIViewController {
+class MainViewController: BaseViewController {
     //MARK: Properties
     var bglayer: CAGradientLayer!
     @IBOutlet weak var backgroundView: UIView!
@@ -18,11 +18,17 @@ class MainViewController: UIViewController {
     @IBOutlet weak var usernameLabel: UILabel!
     var arrayOfTitles: [String]!
     var arrayOfIMGNames: [String]!
-    var username: String?
+    var user: User!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.prepareUI()
+        super.loadWhiteScreenTransition()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        super.removeWhiteScreenTransition()
     }
     
     func prepareUI(){
@@ -40,11 +46,7 @@ class MainViewController: UIViewController {
         self.xibWrapView.layer.mask = shape
         // Title Wrap Edge
         self.titleWrapView.layer.cornerRadius = 40
-        
-        if self.username == nil {
-            self.username = "Hi Kristy"
-        }
-        self.usernameLabel.text = self.username
+        self.usernameLabel.text = "Hi \(self.user.username)"
     }
     
 

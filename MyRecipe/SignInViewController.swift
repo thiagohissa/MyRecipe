@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SignInViewController: UIViewController {
+class SignInViewController: BaseViewController {
     
     //MARK: Properties
     var bglayer: CAGradientLayer!
@@ -22,6 +22,10 @@ class SignInViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.prepareUI()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
     }
     
     func prepareUI(){
@@ -53,10 +57,35 @@ class SignInViewController: UIViewController {
     
     //MARK: IBActions
     @IBAction func loginTapped(_ sender: Any) {
-        let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "MainViewController")
-        self.present(vc, animated: true, completion: nil)
-        
+        if (self.emailTextField.text?.isEmpty) ?? false || (self.passwordTextField.text?.isEmpty) ?? false {
+            super.presentAlert(title: "EMPTY FIELDS", message: "Please make sure you have entered all required fields")
+        }
+        else if !(self.emailTextField.text?.contains("@"))!{
+            super.presentAlert(title: "EMAIL FORMAT", message: "Please make sure you have entered your email properly")
+        }
+        else{
+            super.presentLoadingScreen()
+            let email = self.emailTextField.text!
+            let password = self.passwordTextField.text!
+            BackendManager.loginUserWith(email: email, password: password, completion: { (user, error) in
+                if user != nil {
+                    // User.sharedUser = TODO: user  We need an user cache
+                    let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "MainViewController") as! MainViewController
+                    vc.user = user
+                    self.present(vc, animated: true, completion: nil)
+                }
+                else{
+                    super.removeLoadingScreen()
+                    print("SignInViewController - Error")
+                    DispatchQueue.main.asyncAfter(deadline: .now() + super.loadingScreenDuration, execute: {
+                        super.presentAlert(title: "ERROR", message: (error?.localizedDescription)!)
+                    })
+                }
+            })
+        }
+
     }
+    
     @IBAction func signUpTapped(_ sender: Any) {
     }
     

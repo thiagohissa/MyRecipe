@@ -17,6 +17,8 @@ class GrayLayer: UIView {
     @IBAction func viewTapped(_ sender: UITapGestureRecognizer) {
         let notificationName1 = Notification.Name("REMOVE_TIMER_POP_UP_NOTIFICATION")
         NotificationCenter.default.post(name: notificationName1, object: nil)
+        let notificationName2 = Notification.Name("REMOVE_ALERT_NOTIFICATION")
+        NotificationCenter.default.post(name: notificationName2, object: nil)
     }
     
 }

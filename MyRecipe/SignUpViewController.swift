@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SignUpViewController: UIViewController {
+class SignUpViewController: BaseViewController {
     
     //MARK: Properties
     @IBOutlet weak var titleWrap: UIView!
@@ -17,8 +17,7 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var rePasswordTextField: UITextField!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var doneButton: UIButton!
-    let alertSheet = AlertSheetView.instanceFromNib() as! AlertSheetView
-    let grayview = GrayLayer.instanceFromNib()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,13 +26,7 @@ class SignUpViewController: UIViewController {
         self.prepareUI()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        NotificationCenter.default.addObserver(self, selector: #selector(receivedNotificationToRemoveTimerPopUp), name: NSNotification.Name(rawValue: "REMOVE_ALERT_NOTIFICATION"), object: nil)
-    }
 
-    override func viewWillDisappear(_ animated: Bool) {
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "REMOVE_ALERT_NOTIFICATION"), object: nil)
-    }
     
     func prepareUI(){
         let border1 = CALayer()
@@ -79,55 +72,39 @@ class SignUpViewController: UIViewController {
     @IBAction func doneTapped(_ sender: Any) {
         if self.nameTextField.text?.isEmpty ?? false || self.emailTextField.text?.isEmpty ?? false || self.passwordTextField.text?.isEmpty ?? false || self.rePasswordTextField.text?.isEmpty ?? false {
             print("SignUp - Textfields Incomplete")
+            super.presentAlert(title: "EMPTY FIELDS", message: "Please make sure you have entered all required fields")
         }
         else if !(self.emailTextField.text?.contains("@"))!{
-            print("SignUp - Wrong email format")
+            super.presentAlert(title: "EMAIL FORMAT", message: "Please make sure you have entered your email properly")
         }
         else if self.passwordTextField.text != self.rePasswordTextField.text{
-            print("SignUp - Passwords don't match")
+            super.presentAlert(title: "PASSWORDS MISMATCH", message: "The passwords you have entered don't match")
         }
         else if self.passwordTextField.text == self.rePasswordTextField.text {
             let email = self.emailTextField.text!
             let password = self.passwordTextField.text!
             let username = self.nameTextField.text!
+            super.presentLoadingScreen()
             BackendManager.createUserFor(email: email, password: password, username: username, completion: { (uid, error) in
                 if error == nil && uid != nil {
                     print("SignUp - Proceeding to MainViewController")
                     BackendManager.saveUserInitialValues(name: username, uid: uid!)
                     let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateInitialViewController() as! MainViewController
-                    vc.username = "Hi \(username)"
+                    vc.user = User.init(name: username, uid: uid!, recipes: nil) // TODO recipes ?
                     self.present(vc, animated: true, completion: nil)
                 }
                 else{
+                    super.removeLoadingScreen()
                     print("SignUp - Error detected: \(String(describing: error?.localizedDescription))")
-                    self.presentAlert(title: "ERROR", message: "\(String(describing: error?.localizedDescription))")
+                    DispatchQueue.main.asyncAfter(deadline: .now() + super.loadingScreenDuration, execute: {
+                        let message = (error?.localizedDescription)!
+                        super.presentAlert(title: "ERROR", message: "\(message)")
+                    })
                 }
             })
         }
     }
     
-    //MARK: Alert
-    func presentAlert(title: String, message: String){
-        self.alertSheet.center.x = self.view.center.x
-        self.alertSheet.center.y = 800
-        self.view.addSubview(self.grayview)
-        self.view.addSubview(self.alertSheet)
-        self.alertSheet.titleLabel.text = title
-        self.alertSheet.messageLabel.text = message
-        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 5.0, initialSpringVelocity: 3, options: UIViewAnimationOptions.curveEaseIn, animations: {
-            self.alertSheet.center.y = self.view.frame.height - (self.alertSheet.frame.height/2) - 20
-        }, completion: nil)
-    }
-    
-    @objc func receivedNotificationToRemoveTimerPopUp() {
-        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 5.0, initialSpringVelocity: 3, options: UIViewAnimationOptions.curveEaseIn, animations: {
-            self.alertSheet.center.y = 1200
-        }, completion: nil)
-        DispatchQueue.main.asyncAfter(deadline: .now()+0.1) {
-            self.alertSheet.removeFromSuperview()
-            self.grayview.removeFromSuperview()
-            self.tabBarController?.tabBar.isHidden = false
-        }
-    }
+
 
 }

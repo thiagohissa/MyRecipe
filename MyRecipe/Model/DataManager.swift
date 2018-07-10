@@ -28,5 +28,6 @@ class DataManager: NSObject {
         return Recipe.init(name: "", cookingTime: 0, briefDescription: "", ingridients: [""], steps: [""], FAVORITE: false, COOKED: false, cookedCount: 0, photos: [Data.init()], dateAdded: Date.init(), tags: [""])
     }
     
+    
 }
 
