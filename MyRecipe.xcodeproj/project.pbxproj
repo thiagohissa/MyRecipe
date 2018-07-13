@@ -15,6 +15,10 @@
 		7E3372D620F3AD3500F51865 /* UserCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E3372D520F3AD3500F51865 /* UserCache.swift */; };
 		7E3372D820F3D21100F51865 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E3372D720F3D21100F51865 /* BaseViewController.swift */; };
 		7E3372DE20F53D8A00F51865 /* loading.gif in Resources */ = {isa = PBXBuildFile; fileRef = 7E3372DD20F53D8A00F51865 /* loading.gif */; };
+		7E3372E020F688B400F51865 /* loading1.gif in Resources */ = {isa = PBXBuildFile; fileRef = 7E3372DF20F688B300F51865 /* loading1.gif */; };
+		7E3372E220F68D3700F51865 /* loading2.gif in Resources */ = {isa = PBXBuildFile; fileRef = 7E3372E120F68D3600F51865 /* loading2.gif */; };
+		7E3372E420F69A8900F51865 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E3372E320F69A8900F51865 /* SettingsViewController.swift */; };
+		7E3372E620F8EAB400F51865 /* CreateRecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E3372E520F8EAB400F51865 /* CreateRecipeViewController.swift */; };
 		7E6C27DE20ED508D00209258 /* TimerPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E6C27DD20ED508D00209258 /* TimerPopUp.xib */; };
 		7E6C27E020ED531700209258 /* TimerPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6C27DF20ED531700209258 /* TimerPopUp.swift */; };
 		7E6C27E220ED541E00209258 /* GrayLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6C27E120ED541E00209258 /* GrayLayer.swift */; };
@@ -70,6 +74,10 @@
 		7E3372D520F3AD3500F51865 /* UserCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCache.swift; sourceTree = "<group>"; };
 		7E3372D720F3D21100F51865 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		7E3372DD20F53D8A00F51865 /* loading.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = loading.gif; sourceTree = "<group>"; };
+		7E3372DF20F688B300F51865 /* loading1.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = loading1.gif; sourceTree = "<group>"; };
+		7E3372E120F68D3600F51865 /* loading2.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = loading2.gif; sourceTree = "<group>"; };
+		7E3372E320F69A8900F51865 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		7E3372E520F8EAB400F51865 /* CreateRecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRecipeViewController.swift; sourceTree = "<group>"; };
 		7E6C27DD20ED508D00209258 /* TimerPopUp.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TimerPopUp.xib; sourceTree = "<group>"; };
 		7E6C27DF20ED531700209258 /* TimerPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerPopUp.swift; sourceTree = "<group>"; };
 		7E6C27E120ED541E00209258 /* GrayLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrayLayer.swift; sourceTree = "<group>"; };
@@ -163,6 +171,8 @@
 				7E6C27EB20EE984B00209258 /* SignUpViewController.swift */,
 				7EA3F44020EBE762001B0756 /* MainViewController.swift */,
 				7E08D96E20EC12A3002F68D8 /* RecipesViewController.swift */,
+				7E3372E520F8EAB400F51865 /* CreateRecipeViewController.swift */,
+				7E3372E320F69A8900F51865 /* SettingsViewController.swift */,
 				7EA3F44920EC09BE001B0756 /* CustomViews */,
 				7EA3F43F20EBE67A001B0756 /* Model */,
 				7EA3F44420EC05B5001B0756 /* Xib */,
@@ -171,6 +181,8 @@
 				7EA3F41820EBE5F5001B0756 /* LaunchScreen.storyboard */,
 				7EA3F41620EBE5F5001B0756 /* Assets.xcassets */,
 				7E3372DD20F53D8A00F51865 /* loading.gif */,
+				7E3372DF20F688B300F51865 /* loading1.gif */,
+				7E3372E120F68D3600F51865 /* loading2.gif */,
 				7EA3F41B20EBE5F5001B0756 /* Info.plist */,
 				7E6C27ED20EFACEC00209258 /* GoogleService-Info.plist */,
 			);
@@ -373,6 +385,8 @@
 				7E98DEF620EFC330001EDD61 /* AlertSheet.xib in Resources */,
 				7E6C27DE20ED508D00209258 /* TimerPopUp.xib in Resources */,
 				7E6C27E420ED542700209258 /* GrayLayer.xib in Resources */,
+				7E3372E220F68D3700F51865 /* loading2.gif in Resources */,
+				7E3372E020F688B400F51865 /* loading1.gif in Resources */,
 				7EA3F41A20EBE5F5001B0756 /* LaunchScreen.storyboard in Resources */,
 				7E6C27E620EE8B4D00209258 /* SignSignUp.storyboard in Resources */,
 				7EA3F41720EBE5F5001B0756 /* Assets.xcassets in Resources */,
@@ -575,9 +589,11 @@
 				7E08D97320EC14B8002F68D8 /* DataManager.swift in Sources */,
 				7E08D97120EC1499002F68D8 /* Recipe.swift in Sources */,
 				7E08D96F20EC12A3002F68D8 /* RecipesViewController.swift in Sources */,
+				7E3372E620F8EAB400F51865 /* CreateRecipeViewController.swift in Sources */,
 				7E3372D620F3AD3500F51865 /* UserCache.swift in Sources */,
 				7E6C27E820EE8BA700209258 /* SignInViewController.swift in Sources */,
 				7EA3F43E20EBE666001B0756 /* Color.swift in Sources */,
+				7E3372E420F69A8900F51865 /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

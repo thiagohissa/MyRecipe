@@ -47,7 +47,22 @@ class BackendManager: NSObject {
                         let uid = (result?.user.uid)!
                         let name = value["username"] as! String
                         let user = User.init(name: name, uid: uid, recipes: nil)
-                        completion(user, error)
+                        Database.database().reference().child(uid).child("recipes").observe(.value, with: { (snap) in
+                            if snap.exists() { // Fetch Recipes
+                                let value = snap.value as! NSDictionary
+                                var recipeArray: [Recipe] = []
+                                for recipes in value {
+                                    let recipeDict = value[recipes] as! NSDictionary
+                                    let newrecipe = Recipe.init(dict: recipeDict)
+                                    recipeArray.append(newrecipe)
+                                }
+                                user.recipes = recipeArray
+                            }
+                            else{
+                                // No Recipes for this user
+                            }
+                            completion(user, error)
+                        })
                     }
                     else { completion(nil, error) }
                 })

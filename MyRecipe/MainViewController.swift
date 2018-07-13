@@ -49,7 +49,10 @@ class MainViewController: BaseViewController {
         self.usernameLabel.text = "Hi \(self.user.username)"
     }
     
-
+    
+    @IBAction func settingsTapped(_ sender: UIButton) {
+        self.performSegue(withIdentifier: "SegueToSettings", sender: nil)
+    }
     
    
 

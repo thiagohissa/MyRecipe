@@ -83,7 +83,7 @@ class RecipesViewController: UIViewController, UITableViewDataSource, UITableVie
     //MARK: TableView
     func numberOfSections(in tableView: UITableView) -> Int {
         if self.isCooking {
-            return self.recipe.steps.count
+            return self.recipe.steps.count + 1
         }
         return self.arrayOfRecipes.count
     }
@@ -101,8 +101,14 @@ class RecipesViewController: UIViewController, UITableViewDataSource, UITableVie
         }
         else{
             let cell = tableView.dequeueReusableCell(withIdentifier: "Cell2") as! CookingCell
-            cell.stepText.text = self.recipe.steps[indexPath.section]
-            cell.stepLabelCount.text = "Step \(indexPath.section+1)"
+            if self.recipe.steps.count <= indexPath.section {
+                cell.stepText.text = "Tap here to finish cooking this recipe"
+                cell.stepLabelCount.text = "Done"
+            }
+            else{
+                cell.stepText.text = self.recipe.steps[indexPath.section]
+                cell.stepLabelCount.text = "Step \(indexPath.section+1)"
+            }
             cell.updateConstraintsIfNeeded()
             return cell
         }
@@ -137,10 +143,15 @@ class RecipesViewController: UIViewController, UITableViewDataSource, UITableVie
             })
         }
         else{
-            let cell = self.tableView.cellForRow(at: indexPath) as! CookingCell
-            cell.circleView.backgroundColor = UIColor.init(red: 244/255, green: 146/255, blue: 158/255, alpha: 1.0)
-            let scrollIndex = IndexPath.init(row: indexPath.row, section: indexPath.section+1)
-            self.tableView.scrollToRow(at: scrollIndex, at: UITableViewScrollPosition.top, animated: true)
+            if indexPath.section < self.recipe.steps.count {
+                let cell = self.tableView.cellForRow(at: indexPath) as! CookingCell
+                cell.circleView.backgroundColor = UIColor.init(red: 244/255, green: 146/255, blue: 158/255, alpha: 1.0)
+                let scrollIndex = IndexPath.init(row: indexPath.row, section: indexPath.section+1)
+                self.tableView.scrollToRow(at: scrollIndex, at: UITableViewScrollPosition.top, animated: true)
+            }
+            else{
+                print("Done!") // TODO display warning
+            }
         }
     }
     
@@ -276,13 +287,13 @@ class RecipesViewController: UIViewController, UITableViewDataSource, UITableVie
         var hourString = "\(self.hour!)"
         var minuteString = "\(self.minute!)"
         var secondString = "\(self.second!)"
-        if hour! <= 10 {
+        if hour! < 10 {
             hourString = "0\(self.hour!)"
         }
-        if minute! <= 10 {
+        if minute! < 10 {
             minuteString = "0\(self.minute!)"
         }
-        if second! <= 10 {
+        if second! < 10 {
             secondString = "0\(self.second!)"
         }
 

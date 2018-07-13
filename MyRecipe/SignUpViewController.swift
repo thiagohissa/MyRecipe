@@ -81,10 +81,13 @@ class SignUpViewController: BaseViewController {
             super.presentAlert(title: "PASSWORDS MISMATCH", message: "The passwords you have entered don't match")
         }
         else if self.passwordTextField.text == self.rePasswordTextField.text {
+            
             let email = self.emailTextField.text!
             let password = self.passwordTextField.text!
             let username = self.nameTextField.text!
+            
             super.presentLoadingScreen()
+            
             BackendManager.createUserFor(email: email, password: password, username: username, completion: { (uid, error) in
                 if error == nil && uid != nil {
                     print("SignUp - Proceeding to MainViewController")

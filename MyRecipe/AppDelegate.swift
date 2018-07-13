@@ -8,6 +8,8 @@
 
 import UIKit
 import Firebase
+import FirebaseAuth
+import FirebaseDatabase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -18,6 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
         application.isStatusBarHidden = true
+        self.checkIUserIsSignIn()
         return true
     }
 
@@ -41,6 +44,43 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    }
+    
+    func checkIUserIsSignIn(){
+        Auth.auth().addStateDidChangeListener { (auth, user) in
+            if let user = user {
+                // User is sign in
+                Database.database().reference().child(user.uid).observeSingleEvent(of: DataEventType.value, with: { (snapshot) in
+                    if snapshot.exists() {
+                        let value = snapshot.value as! NSDictionary
+                        let uid = user.uid
+                        let name = value["username"] as! String
+                        let user = User.init(name: name, uid: uid, recipes: nil)
+                        Database.database().reference().child(uid).child("recipes").observe(.value, with: { (snap) in
+                            if snap.exists() { // Fetch Recipes
+                                let value = snap.value as! NSDictionary
+                                var recipeArray: [Recipe] = []
+                                for recipes in value {
+                                    let recipeDict = value[recipes] as! NSDictionary
+                                    let newrecipe = Recipe.init(dict: recipeDict)
+                                    recipeArray.append(newrecipe)
+                                }
+                                user.recipes = recipeArray
+                            }
+                            else{
+                                // No Recipes for this user
+                            }
+                            let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "MainViewController") as! MainViewController
+                            vc.user = user
+                            self.window?.rootViewController?.present(vc, animated: true, completion: nil)
+                        })
+                    }
+                })
+            }
+            else{
+                // User is sign out
+            }
+        }
     }
 
 

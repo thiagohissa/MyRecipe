@@ -58,7 +58,7 @@ class BaseViewController: UIViewController {
         self.whiteView.alpha = 0
         
         let webview = UIWebView.init(frame: CGRect.init(x: 0, y: 0, width: 200, height: 200))
-        let url = Bundle.main.url(forResource: "loading", withExtension: "gif")!
+        let url = Bundle.main.url(forResource: "loading2", withExtension: "gif")!
         let data = try! Data(contentsOf: url)
         webview.load(data, mimeType: "image/gif", textEncodingName: "UTF-8", baseURL: NSURL() as URL)
         webview.scalesPageToFit = true

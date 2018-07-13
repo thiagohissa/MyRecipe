@@ -58,7 +58,7 @@ class SignInViewController: BaseViewController {
     //MARK: IBActions
     @IBAction func loginTapped(_ sender: Any) {
         if (self.emailTextField.text?.isEmpty) ?? false || (self.passwordTextField.text?.isEmpty) ?? false {
-            super.presentAlert(title: "EMPTY FIELDS", message: "Please make sure you have entered all required fields")
+            super.presentAlert(title: "EMPTY FIELD", message: "Please make sure you have entered all required fields")
         }
         else if !(self.emailTextField.text?.contains("@"))!{
             super.presentAlert(title: "EMAIL FORMAT", message: "Please make sure you have entered your email properly")
