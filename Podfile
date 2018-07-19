@@ -11,6 +11,7 @@ pod 'Firebase/Core'
 pod 'Firebase/Auth'
 pod 'Firebase/Database'
 pod 'Firebase/Storage'
+pod 'IQKeyboardManagerSwift', '~> 6.1'
 
   target 'MyRecipeTests' do
     inherit! :search_paths

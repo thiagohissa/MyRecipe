@@ -31,6 +31,7 @@
 		7E6C27EF20EFACED00209258 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7E6C27ED20EFACEC00209258 /* GoogleService-Info.plist */; };
 		7E6C27F020EFACED00209258 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7E6C27ED20EFACEC00209258 /* GoogleService-Info.plist */; };
 		7E6FD9EA20F023E6007583A5 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6FD9E920F023E6007583A5 /* User.swift */; };
+		7E8D95AD2100BFBC004D94BC /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8D95AC2100BFBC004D94BC /* TextField.swift */; };
 		7E98DEF420EFB0CB001EDD61 /* BackendManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E98DEF320EFB0CB001EDD61 /* BackendManager.swift */; };
 		7E98DEF620EFC330001EDD61 /* AlertSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E98DEF520EFC330001EDD61 /* AlertSheet.xib */; };
 		7E98DEF820EFC426001EDD61 /* AlertSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E98DEF720EFC426001EDD61 /* AlertSheetView.swift */; };
@@ -88,6 +89,7 @@
 		7E6C27EB20EE984B00209258 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		7E6C27ED20EFACEC00209258 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7E6FD9E920F023E6007583A5 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		7E8D95AC2100BFBC004D94BC /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 		7E98DEF320EFB0CB001EDD61 /* BackendManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackendManager.swift; sourceTree = "<group>"; };
 		7E98DEF520EFC330001EDD61 /* AlertSheet.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlertSheet.xib; sourceTree = "<group>"; };
 		7E98DEF720EFC426001EDD61 /* AlertSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertSheetView.swift; sourceTree = "<group>"; };
@@ -236,6 +238,7 @@
 		7EA3F44920EC09BE001B0756 /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
+				7E8D95AC2100BFBC004D94BC /* TextField.swift */,
 				7E3372D720F3D21100F51865 /* BaseViewController.swift */,
 				7E6C27E920EE96B400209258 /* ColorBackgroundView.swift */,
 				7EA3F44720EC09B7001B0756 /* MenuCell.swift */,
@@ -578,6 +581,7 @@
 				7E6C27EA20EE96B400209258 /* ColorBackgroundView.swift in Sources */,
 				7E6C27E020ED531700209258 /* TimerPopUp.swift in Sources */,
 				7EA3F44120EBE762001B0756 /* MainViewController.swift in Sources */,
+				7E8D95AD2100BFBC004D94BC /* TextField.swift in Sources */,
 				7E98DEF420EFB0CB001EDD61 /* BackendManager.swift in Sources */,
 				7EA3F41020EBE5F5001B0756 /* AppDelegate.swift in Sources */,
 				7E98DEF820EFC426001EDD61 /* AlertSheetView.swift in Sources */,
