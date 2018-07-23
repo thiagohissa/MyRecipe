@@ -18,10 +18,13 @@ class CreateRecipeViewController: BaseViewController, UITextViewDelegate, UITabl
     @IBOutlet weak var okButton: UIButton!
     @IBOutlet weak var wrapTablePopup: UIView!
     @IBOutlet weak var previewTable: UITableView!
+    @IBOutlet weak var previewTitle: UILabel!
+    @IBOutlet weak var switchTableButton: UIButton!
     var bglayer: CAGradientLayer!
     var arrayOfIngridients: [String] = []
     var arrayOfSteps: [String] = []
     var isIngridients: Bool!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,6 +53,7 @@ class CreateRecipeViewController: BaseViewController, UITextViewDelegate, UITabl
             }
         }
         self.okButton.layer.cornerRadius = 18
+        self.switchTableButton.layer.cornerRadius = 18
         // Text fields
         self.ingridientTextField.layer.borderWidth = 1
         self.ingridientTextField.layer.cornerRadius = 8
@@ -100,6 +104,33 @@ class CreateRecipeViewController: BaseViewController, UITextViewDelegate, UITabl
         return header
     }
     
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if (editingStyle == UITableViewCellEditingStyle.delete) {
+            if self.isIngridients {
+                print("Delete this row for ingridients")
+                self.arrayOfIngridients.remove(at: indexPath.section)
+            }
+            else{
+                print("Delete this row for steps")
+                self.arrayOfSteps.remove(at: indexPath.section)
+            }
+            self.previewTable.reloadData()
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let deleteButton = UITableViewRowAction(style: .default, title: "Delete", handler: { (action, indexPath) in
+            self.previewTable.dataSource?.tableView!(self.previewTable, commit: .delete, forRowAt: indexPath)
+            return
+        })
+        deleteButton.backgroundColor = UIColor.init(red: 241/255, green: 146/255, blue: 153/255, alpha: 1)
+        return [deleteButton]
+    }
+    
     //MARK: IBActions
     @IBAction func nextTapped(_ sender: UIButton) {
         if sender.tag == 1 {
@@ -123,23 +154,42 @@ class CreateRecipeViewController: BaseViewController, UITextViewDelegate, UITabl
     }
     
     @IBAction func seeTapped(_ sender: UIButton) {
-        if sender.tag == 1 {
-            self.isIngridients = true
-            if self.arrayOfIngridients.isEmpty {
-                super.presentAlert(title: "INGRIDIENTS", message: "There are no ingridients yet for this recipe")
-            }
-            else{
-                self.presentPreview()
-            }
+        var array1Empty = false
+        var array2Empty = false
+        if self.arrayOfIngridients.isEmpty { array1Empty = true}
+        if self.arrayOfSteps.isEmpty { array2Empty = true }
+
+        
+        if array1Empty && array2Empty {
+            super.presentAlert(title: "EMPTY FIELDS", message: "Please add at least 1 ingridient or 1 step to see a preview.")
+            self.wrapTablePopup.isHidden = true
         }
         else{
-            self.isIngridients = false
+            self.isIngridients = !array1Empty
+            self.presentPreview()
+        }
+    }
+    
+    @IBAction func switchTableTapped(_ sender: UIButton) {
+        if self.isIngridients {
             if self.arrayOfSteps.isEmpty {
-                super.presentAlert(title: "STEPS", message: "There are no steps yet for this recipe")
+                super.presentAlert(title: "EMPTY STEPS", message: "You have no steps")
+                return
             }
-            else{
-                self.presentPreview()
+            self.isIngridients = false
+            self.previewTable.reloadData()
+            self.previewTitle.text = "STEPS"
+            self.switchTableButton.setTitle("See Ingridients", for: .normal)
+        }
+        else{
+            if self.arrayOfSteps.isEmpty {
+                super.presentAlert(title: "EMPTY INGRIDIENTS", message: "You have no ingridients")
+                return
             }
+            self.isIngridients = true
+            self.previewTable.reloadData()
+            self.previewTitle.text = "INGRIDIENTS"
+            self.switchTableButton.setTitle("See Steps", for: .normal)
         }
     }
     
@@ -164,6 +214,11 @@ class CreateRecipeViewController: BaseViewController, UITextViewDelegate, UITabl
     
     //MARK: Preview animation
     func presentPreview(){
+        if self.isIngridients {
+            self.previewTitle.text = "INGRIDIENTS"
+        } else { self.previewTitle.text = "STEPS" }
+        self.ingridientTextField.endEditing(true)
+        self.stepsTextView.endEditing(true)
         self.previewTable.reloadData()
         self.wrapTablePopup.center.x = self.view.center.x
         self.wrapTablePopup.isHidden = false
