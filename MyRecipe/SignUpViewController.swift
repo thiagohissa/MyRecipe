@@ -93,7 +93,6 @@ class SignUpViewController: BaseViewController {
                     print("SignUp - Proceeding to MainViewController")
                     BackendManager.saveUserInitialValues(name: username, uid: uid!)
                     let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateInitialViewController() as! MainViewController
-                    vc.user = User.init(name: username, uid: uid!, recipes: nil) // TODO recipes ?
                     self.present(vc, animated: true, completion: nil)
                 }
                 else{

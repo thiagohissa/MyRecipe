@@ -24,8 +24,8 @@ class RecipesViewController: UIViewController, UITableViewDataSource, UITableVie
     @IBOutlet weak var ingridientsCollectionWrapView: UIView!
     @IBOutlet weak var ingridientsCollectionView: UICollectionView!
     var bglayer: CAGradientLayer!
-    var arrayOfRecipes: [Recipe]!
     var recipe: Recipe!
+    var user: User!
     
     //Timer Properties
     var TIMER_ON: Bool!
@@ -39,13 +39,13 @@ class RecipesViewController: UIViewController, UITableViewDataSource, UITableVie
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.user = BackendManager.shared.user
         self.isCooking = false
-        self.arrayOfRecipes = DataManager.getArrayOfRecipes()
         self.prepareUI()
         self.tableView.estimatedRowHeight = 120
         self.TIMER_ON = false
         self.isIngridientOn = false
-        self.recipe = DataManager.getEmptyOfRecipes()
+        self.recipe = DataManager.getEmptyRecipe()
         self.ingridientsCollectionWrapView.alpha = 0
         self.ingridientsCollectionView.alpha = 0
     }
@@ -85,7 +85,16 @@ class RecipesViewController: UIViewController, UITableViewDataSource, UITableVie
         if self.isCooking {
             return self.recipe.steps.count + 1
         }
-        return self.arrayOfRecipes.count
+        else {
+            var count: Int
+            if let recipeArray = self.user.recipes {
+                count = recipeArray.count
+            }
+            else{
+                count = 1
+            }
+            return count
+        }
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
@@ -93,9 +102,21 @@ class RecipesViewController: UIViewController, UITableViewDataSource, UITableVie
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if !self.isCooking {
             let cell = tableView.dequeueReusableCell(withIdentifier: "Cell1") as! RecipeCell
-            cell.name.text = "\(self.arrayOfRecipes[indexPath.section].name) "
-            cell.briefDescription.text = self.arrayOfRecipes[indexPath.section].briefDescription
-            cell.minute.text = "Ready in \(String(self.arrayOfRecipes[indexPath.section].cookingTime))min"
+            if self.user.recipes == nil {
+                cell.name.text = "You have no Recipes yet!"
+                cell.briefDescription.text = "Tap on New Recipe to create a recipe or go to the main meno and search for one."
+                cell.minute.text = ""
+                cell.heartButton.isHidden = true
+            }
+            else{
+                cell.name.text = "\(self.user.recipes![indexPath.section].name) "
+                cell.briefDescription.text = self.user.recipes![indexPath.section].briefDescription
+                cell.minute.text = "Ready in \(String(self.user.recipes![indexPath.section].cookingTime))min"
+                cell.heartButton.isHidden = false
+                cell.heartButton.tag = indexPath.section
+                if !self.user.recipes![indexPath.section].FAVORITE { cell.heartButton.setImage(UIImage.init(named: "icon_heartEmpty"), for: .normal) }
+                else { cell.heartButton.setImage(UIImage.init(named: "icon_heartFull"), for: .normal) }
+            }
             cell.updateConstraintsIfNeeded()
             return cell
         }
@@ -122,8 +143,8 @@ class RecipesViewController: UIViewController, UITableViewDataSource, UITableVie
         return header
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if !self.isCooking {
-            self.recipe = self.arrayOfRecipes[indexPath.section]
+        if !self.isCooking && self.user.recipes != nil { // User is tapping on Recipe
+            self.recipe = self.user.recipes![indexPath.section]
             self.isCooking = true
             self.bottomButtonStack.alpha = 0
             self.bottomButtonStack.isHidden = false
@@ -134,7 +155,7 @@ class RecipesViewController: UIViewController, UITableViewDataSource, UITableVie
             })
             DispatchQueue.main.asyncAfter(deadline: .now()+0.5, execute: {
                 self.tableView.reloadData()
-                self.selectionTitle.text = self.arrayOfRecipes[indexPath.section].name.uppercased()
+                self.selectionTitle.text = self.user.recipes![indexPath.section].name.uppercased()
                 UIView.animate(withDuration: 0.5, animations: {
                     self.tableView.alpha = 1
                     self.selectionTitle.alpha = 1
@@ -142,7 +163,7 @@ class RecipesViewController: UIViewController, UITableViewDataSource, UITableVie
                 })
             })
         }
-        else{
+        else if self.user.recipes != nil{ // User is tapping on Step
             if indexPath.section < self.recipe.steps.count {
                 let cell = self.tableView.cellForRow(at: indexPath) as! CookingCell
                 cell.circleView.backgroundColor = UIColor.init(red: 244/255, green: 146/255, blue: 158/255, alpha: 1.0)
@@ -173,9 +194,19 @@ class RecipesViewController: UIViewController, UITableViewDataSource, UITableVie
         self.dismiss(animated: true, completion: nil)
     }
     @IBAction func heartButtonTapped(_ sender: UIButton) {
+        if self.user.recipes![sender.tag].FAVORITE {
+            BackendManager.unfavoriteRecipe(recipe: self.user.recipes![sender.tag])
+            sender.setImage(UIImage.init(named: "icon_heartEmpty"), for: .normal)
+        }
+        else{
+            BackendManager.favoriteRecipe(recipe: self.user.recipes![sender.tag])
+            sender.setImage(UIImage.init(named: "icon_heartFull"), for: .normal)
+        }
     }
+    
     @IBAction func newRecipeTapped(_ sender: UIButton) {
     }
+    
     @IBAction func ingridientsTapped(_ sender: UIButton) {
         if !self.isIngridientOn {
             self.isIngridientOn = true

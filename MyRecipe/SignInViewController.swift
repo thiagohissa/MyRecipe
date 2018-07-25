@@ -71,7 +71,6 @@ class SignInViewController: BaseViewController {
                 if user != nil {
                     // User.sharedUser = TODO: user  We need an user cache
                     let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "MainViewController") as! MainViewController
-                    vc.user = user
                     self.present(vc, animated: true, completion: nil)
                 }
                 else{

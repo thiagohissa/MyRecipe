@@ -22,6 +22,7 @@ class MainViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.user = BackendManager.shared.user
         self.prepareUI()
         super.loadWhiteScreenTransition()
     }
@@ -53,6 +54,15 @@ class MainViewController: BaseViewController {
     @IBAction func settingsTapped(_ sender: UIButton) {
         self.performSegue(withIdentifier: "SegueToSettings", sender: nil)
     }
+    
+    
+    //MARK: Segue
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == "SegueToRecipes" {
+//            let vc = segue.destination as! RecipesViewController
+//            vc.user = self.user
+//        }
+//    }
     
    
 

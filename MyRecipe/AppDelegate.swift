@@ -61,19 +61,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         Database.database().reference().child(uid).child("recipes").observe(.value, with: { (snap) in
                             if snap.exists() { // Fetch Recipes
                                 let value = snap.value as! NSDictionary
-                                var recipeArray: [Recipe] = []
-                                for recipes in value {
-                                    let recipeDict = value[recipes] as! NSDictionary
-                                    let newrecipe = Recipe.init(dict: recipeDict)
-                                    recipeArray.append(newrecipe)
+                                var arrayOfRecipes: [Recipe] = []
+                                for recipe in value {
+                                    let new_recipe = Recipe.init(dict: recipe.value as! NSDictionary)
+                                    arrayOfRecipes.append(new_recipe)
                                 }
-                                user.recipes = recipeArray
+                                user.recipes = arrayOfRecipes
                             }
-                            else{
-                                // No Recipes for this user
-                            }
+                            BackendManager.shared.user = user
                             let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "MainViewController") as! MainViewController
-                            vc.user = user
+//                            vc.user = user
                             self.window?.rootViewController?.present(vc, animated: true, completion: nil)
                         })
                     }

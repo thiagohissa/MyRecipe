@@ -20,6 +20,8 @@ class CreateRecipeViewController: BaseViewController, UITextViewDelegate, UITabl
     @IBOutlet weak var previewTable: UITableView!
     @IBOutlet weak var previewTitle: UILabel!
     @IBOutlet weak var switchTableButton: UIButton!
+    @IBOutlet weak var recipeNameTextField: TextField!
+    @IBOutlet weak var cookingtimeTextField: TextField!
     var bglayer: CAGradientLayer!
     var arrayOfIngridients: [String] = []
     var arrayOfSteps: [String] = []
@@ -58,6 +60,12 @@ class CreateRecipeViewController: BaseViewController, UITextViewDelegate, UITabl
         self.ingridientTextField.layer.borderWidth = 1
         self.ingridientTextField.layer.cornerRadius = 8
         self.ingridientTextField.layer.borderColor = UIColor.lightGray.cgColor
+        self.recipeNameTextField.layer.borderWidth = 1
+        self.recipeNameTextField.layer.cornerRadius = 8
+        self.recipeNameTextField.layer.borderColor = UIColor.lightGray.cgColor
+        self.cookingtimeTextField.layer.borderWidth = 1
+        self.cookingtimeTextField.layer.cornerRadius = 8
+        self.cookingtimeTextField.layer.borderColor = UIColor.lightGray.cgColor
         self.stepsTextView.layer.borderWidth = 1
         self.stepsTextView.layer.cornerRadius = 18
         self.stepsTextView.layer.borderColor = UIColor.lightGray.cgColor
@@ -195,6 +203,20 @@ class CreateRecipeViewController: BaseViewController, UITextViewDelegate, UITabl
     
     @IBAction func okTapped(_ sender: UIButton) {
         self.removePreview()
+    }
+    
+    @IBAction func backTapped(_ sender: UIButton) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func doneTapped(_ sender: UIButton) {
+        if (self.recipeNameTextField.text?.isEmpty)! || (self.cookingtimeTextField.text?.isEmpty)! || self.arrayOfIngridients.isEmpty || self.arrayOfSteps.isEmpty {
+            super.presentAlert(title: "EMPTY FIELDS", message: "Make sure to have filled out all spaces and to have included at least 1 ingridient and 1 step.")
+        }
+        else{
+            let recipe = Recipe.init(name: self.recipeNameTextField.text!, cookingTime: Int(self.cookingtimeTextField.text!)!, briefDescription: "", ingridients: self.arrayOfIngridients, steps: self.arrayOfSteps, FAVORITE: false, COOKED: false, cookedCount: 0, photos: [Data.init()], dateAdded: Date.init(), tags: [""])
+            BackendManager.saveRecipeForCurrentUser(recipe: recipe)
+        }
     }
     
     //MARK :TextField Delegate

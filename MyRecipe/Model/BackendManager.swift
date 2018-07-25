@@ -15,6 +15,8 @@ import FirebaseDatabase
 
 class BackendManager: NSObject {
     
+    static let shared = BackendManager()
+    var user: User!
     
     //MARK: User Creation
     class func createUserFor(email: String, password: String, username: String, completion: @escaping (_ uid: String?,_ error: Error?) -> Void) {
@@ -23,6 +25,7 @@ class BackendManager: NSObject {
             if error == nil {
                 print("BackendManager User Creation - User created")
                 completion(result?.user.uid, error)
+                BackendManager.shared.user = User.init(name: username, uid: (result?.user.uid)!, recipes: nil)
             }
             else{
                 completion("", error)
@@ -61,6 +64,7 @@ class BackendManager: NSObject {
                             else{
                                 // No Recipes for this user
                             }
+                            BackendManager.shared.user = user
                             completion(user, error)
                         })
                     }
@@ -73,12 +77,32 @@ class BackendManager: NSObject {
         }
     }
     
-    class func getUsersRecipes(userUID: String, completion: @escaping (_ recipes: [Recipe]?,_ error: Error)-> Void){
-        Database.database().reference().child(userUID).child("recipes").observeSingleEvent(of: .value) { (snapshot) in
-            if snapshot.exists() {
-                // init recipes here
-            }
-        }
+    class func saveRecipeForCurrentUser(recipe: Recipe) {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd-MM-yyyy"
+        let currentDate = Date.init()
+        let dateString = dateFormatter.string(from: currentDate)
+        
+        let dict = ["name" : recipe.name,
+                    "cookingTime" : recipe.cookingTime,
+                    "briefDescription" : "na",
+                    "ingridients" : recipe.ingridients,
+                    "steps" : recipe.steps,
+                    "FAVORITE" : false,
+                    "COOKED" : false,
+                    "cookedCount" : 0,
+                    "photos" : "na",
+                    "dateAdded" : dateString,] as [String : Any]
+        Database.database().reference().child(BackendManager.shared.user.uid).child("recipes").child(recipe.name).updateChildValues(dict)
+        
+    }
+    
+    class func favoriteRecipe(recipe: Recipe){
+        Database.database().reference().child(BackendManager.shared.user.uid).child("recipes").child(recipe.name).updateChildValues(["FAVORITE": true])
+    }
+    
+    class func unfavoriteRecipe(recipe: Recipe){
+        Database.database().reference().child(BackendManager.shared.user.uid).child("recipes").child(recipe.name).updateChildValues(["FAVORITE": false])
     }
     
     

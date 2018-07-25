@@ -46,10 +46,11 @@ class Recipe: NSObject {
         self.FAVORITE = dict["FAVORITE"] as! Bool
         self.COOKED = dict["COOKED"] as! Bool
         self.cookedCount = dict["cookedCount"] as! Int
-        if let photos = dict["photos"] as! [Data]! { self.photos = photos }
-        self.dateAdded = dict["dateAdded"] as! Date
-        if let tags = dict["tags"] as! [String]! { self.tags = tags }
+//        if let photos = dict["photos"] as! [Data]! { self.photos = photos }
+        self.dateAdded =  DataManager.getDateFromString(string: dict["dateAdded"] as! String)
+//        if let tags = dict["tags"] as! [String]! { self.tags = tags }
     }
+    
     
     
 }
