@@ -16,6 +16,9 @@
             <string>AvenirNext-Medium</string>
             <string>AvenirNext-Regular</string>
         </array>
+        <array key="SignPainter HouseScript Regular.ttf">
+            <string>SignPainterHouseScript</string>
+        </array>
     </customFonts>
     <scenes>
         <!--Sign In View Controller-->
@@ -41,17 +44,17 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MyRecipe" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ivu-At-Sux">
-                                        <rect key="frame" x="95" y="238" width="185" height="44"/>
+                                        <rect key="frame" x="91" y="238" width="193" height="53"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="44" id="Cos-Gn-GY4"/>
-                                            <constraint firstAttribute="width" constant="185" id="U8m-e7-QHU"/>
+                                            <constraint firstAttribute="height" constant="53" id="Cos-Gn-GY4"/>
+                                            <constraint firstAttribute="width" constant="193" id="U8m-e7-QHU"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="33"/>
+                                        <fontDescription key="fontDescription" name="SignPainterHouseScript" family="SignPainter HouseScript" pointSize="50"/>
                                         <color key="textColor" red="0.99519230769230771" green="0.99038461538461542" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DGa-JJ-6zH">
-                                        <rect key="frame" x="45" y="566" width="285" height="40"/>
+                                        <rect key="frame" x="45" y="575" width="285" height="40"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Don’t have an account ?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yDx-bc-vZa">
                                                 <rect key="frame" x="0.0" y="0.0" width="196" height="40"/>
@@ -78,7 +81,7 @@
                                         </constraints>
                                     </stackView>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wbd-C4-IOg">
-                                        <rect key="frame" x="45" y="352" width="284" height="30"/>
+                                        <rect key="frame" x="45" y="361" width="284" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="QX3-4P-Skz"/>
                                         </constraints>
@@ -87,7 +90,7 @@
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PCW-UX-rxY">
-                                        <rect key="frame" x="45" y="417" width="284" height="30"/>
+                                        <rect key="frame" x="45" y="426" width="284" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="QiG-4t-LBg"/>
                                         </constraints>
@@ -96,7 +99,7 @@
                                         <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1VU-wu-ksr">
-                                        <rect key="frame" x="30" y="503" width="315" height="43"/>
+                                        <rect key="frame" x="30" y="512" width="315" height="43"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="43" id="rbN-6I-QQi"/>

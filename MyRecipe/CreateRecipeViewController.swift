@@ -22,10 +22,17 @@ class CreateRecipeViewController: BaseViewController, UITextViewDelegate, UITabl
     @IBOutlet weak var switchTableButton: UIButton!
     @IBOutlet weak var recipeNameTextField: TextField!
     @IBOutlet weak var cookingtimeTextField: TextField!
+    @IBOutlet weak var saveRecipeWrapView: UIView!
+    @IBOutlet weak var descriptionTextField: TextField!
+    @IBOutlet weak var tagTextField: TextField!
+    @IBOutlet weak var favoriteSwitch: UISwitch!
+    @IBOutlet weak var saveRecipeButton: UIButton!
+    @IBOutlet weak var blurView: UIVisualEffectView!
     var bglayer: CAGradientLayer!
     var arrayOfIngridients: [String] = []
     var arrayOfSteps: [String] = []
     var isIngridients: Bool!
+    var recipe: Recipe!
     
     
     override func viewDidLoad() {
@@ -57,18 +64,13 @@ class CreateRecipeViewController: BaseViewController, UITextViewDelegate, UITabl
         self.okButton.layer.cornerRadius = 18
         self.switchTableButton.layer.cornerRadius = 18
         // Text fields
-        self.ingridientTextField.layer.borderWidth = 1
-        self.ingridientTextField.layer.cornerRadius = 8
-        self.ingridientTextField.layer.borderColor = UIColor.lightGray.cgColor
-        self.recipeNameTextField.layer.borderWidth = 1
         self.recipeNameTextField.layer.cornerRadius = 8
-        self.recipeNameTextField.layer.borderColor = UIColor.lightGray.cgColor
-        self.cookingtimeTextField.layer.borderWidth = 1
+        self.recipeNameTextField.attributedPlaceholder = NSAttributedString.init(string: "Recipe name", attributes: [NSAttributedStringKey.foregroundColor: UIColor.white])
         self.cookingtimeTextField.layer.cornerRadius = 8
-        self.cookingtimeTextField.layer.borderColor = UIColor.lightGray.cgColor
-        self.stepsTextView.layer.borderWidth = 1
+        self.cookingtimeTextField.attributedPlaceholder = NSAttributedString.init(string: "Cooking time in minutes", attributes: [NSAttributedStringKey.foregroundColor: UIColor.white])
+        self.ingridientTextField.layer.cornerRadius = 8
+        self.ingridientTextField.attributedPlaceholder = NSAttributedString.init(string: "Enter Ingridient here", attributes: [NSAttributedStringKey.foregroundColor: UIColor.white])
         self.stepsTextView.layer.cornerRadius = 18
-        self.stepsTextView.layer.borderColor = UIColor.lightGray.cgColor
         self.stepsTextView.text = "Enter Step Here"
         self.stepsTextView.textColor = UIColor.lightGray
         // TableView
@@ -78,6 +80,16 @@ class CreateRecipeViewController: BaseViewController, UITextViewDelegate, UITabl
         let shape1 = CAShapeLayer()
         shape1.path = maskPath1.cgPath
         self.wrapTablePopup.layer.mask = shape1
+        // SaveRecipeWrapView
+        self.saveRecipeWrapView.layer.cornerRadius = 20
+        let maskPathSRW = UIBezierPath(roundedRect: self.saveRecipeWrapView.bounds, byRoundingCorners: [.topLeft], cornerRadii: CGSize(width: 100, height: 100))
+        let shapeSRW = CAShapeLayer()
+        shapeSRW.path = maskPathSRW.cgPath
+        self.saveRecipeWrapView.layer.mask = shapeSRW
+        self.tagTextField.layer.cornerRadius = 8
+        self.tagTextField.attributedPlaceholder = NSAttributedString.init(string: "Tags  (Optional)", attributes: [NSAttributedStringKey.foregroundColor: UIColor.white])
+        self.descriptionTextField.layer.cornerRadius = 8
+        self.descriptionTextField.attributedPlaceholder = NSAttributedString.init(string: "Brief Description  (Optional)", attributes: [NSAttributedStringKey.foregroundColor: UIColor.white])
     }
     
     //MARK: Tableview
@@ -215,9 +227,45 @@ class CreateRecipeViewController: BaseViewController, UITextViewDelegate, UITabl
         }
         else{
             let recipe = Recipe.init(name: self.recipeNameTextField.text!, cookingTime: Int(self.cookingtimeTextField.text!)!, briefDescription: "", ingridients: self.arrayOfIngridients, steps: self.arrayOfSteps, FAVORITE: false, COOKED: false, cookedCount: 0, photos: [Data.init()], dateAdded: Date.init(), tags: [""])
-            BackendManager.saveRecipeForCurrentUser(recipe: recipe)
+            self.recipe = recipe
+            self.saveRecipeWrapView.center.x = self.view.center.x
+            self.saveRecipeWrapView.center.y = 800
+            self.saveRecipeWrapView.isHidden = false
+//            let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.light)
+//            let blurEffectView = UIVisualEffectView(effect: blurEffect)
+//            blurEffectView.frame = view.bounds
+//            blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+//            self.view.addSubview(blurEffectView) TODO fix this... using storyboard for now but not ideal at all
+            self.blurView.isHidden = false
+            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 5.0, initialSpringVelocity: 3, options: UIViewAnimationOptions.curveEaseIn, animations: {
+                self.saveRecipeWrapView.center.y = self.view.frame.height - (310/2) - 20
+            }, completion: nil)
         }
     }
+    
+    @IBAction func addTagTapped(_ sender: UIButton) {
+        if self.tagTextField.text != nil {
+            self.recipe.tags.append(self.tagTextField.text!)
+        }
+    }
+    
+    @IBAction func saveRecipeTapped(_ sender: UIButton) {
+        if !(self.descriptionTextField.text?.isEmpty)! {
+            self.recipe.briefDescription = self.descriptionTextField.text!
+        }
+        self.recipe.FAVORITE = self.favoriteSwitch.isOn
+        BackendManager.saveRecipeForCurrentUser(recipe: recipe)
+        UIView.animate(withDuration: 1) {
+            self.saveRecipeButton.backgroundColor = UIColor.init(red: 241/255, green: 146/255, blue: 153/255, alpha: 1.0)
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            self.switchTableButton.setTitle("Recipe Saved", for: .normal)
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.dismiss(animated: true, completion: nil)
+        }
+    }
+    
     
     //MARK :TextField Delegate
     func textViewDidBeginEditing(_ textView: UITextView) {
