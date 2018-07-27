@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 class MainViewController: BaseViewController {
     //MARK: Properties
     var bglayer: CAGradientLayer!
@@ -57,12 +58,19 @@ class MainViewController: BaseViewController {
     
     
     //MARK: Segue
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == "SegueToRecipes" {
-//            let vc = segue.destination as! RecipesViewController
-//            vc.user = self.user
-//        }
-//    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "SegueToRecipes" {
+            let vc = segue.destination as! RecipesViewController
+            vc.isFavorites = false
+            vc.pageTitle = "RECIPES"
+        }
+        else if segue.identifier == "SegueToFavorites" {
+            let vc = segue.destination as! RecipesViewController
+            vc.isFavorites = true
+            vc.pageTitle = "FAVORITES"
+        }
+        
+    }
     
    
 

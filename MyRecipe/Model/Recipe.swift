@@ -12,7 +12,7 @@ class Recipe: NSObject {
     
     var name: String
     var cookingTime: Int
-    var briefDescription: String
+    var briefDescription: String?
     var ingridients: [String]
     var steps: [String]
     
@@ -21,7 +21,7 @@ class Recipe: NSObject {
     var cookedCount: Int
     var photos: [Data]!
     var dateAdded: Date
-    var tags: [String]!
+    var tags: [String]?
     
     init(name: String, cookingTime: Int, briefDescription: String, ingridients:[String], steps:[String], FAVORITE:Bool,COOKED: Bool, cookedCount: Int, photos:[Data], dateAdded:Date, tags:[String]) {
         self.name = name

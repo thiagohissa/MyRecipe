@@ -26,6 +26,7 @@ class BackendManager: NSObject {
                 print("BackendManager User Creation - User created")
                 completion(result?.user.uid, error)
                 BackendManager.shared.user = User.init(name: username, uid: (result?.user.uid)!, recipes: nil)
+                Database.database().reference().child("emails").child(BackendManager.shared.user.uid).updateChildValues(["email":email])
             }
             else{
                 completion("", error)
@@ -84,16 +85,32 @@ class BackendManager: NSObject {
         
         let dict = ["name" : recipe.name,
                     "cookingTime" : recipe.cookingTime,
-                    "briefDescription" : "na",
+                    "briefDescription" : recipe.briefDescription ?? "No description for this recipe",
                     "ingridients" : recipe.ingridients,
                     "steps" : recipe.steps,
                     "FAVORITE" : false,
                     "COOKED" : false,
                     "cookedCount" : 0,
                     "photos" : "na",
-                    "dateAdded" : dateString,] as [String : Any]
+                    "dateAdded" : dateString,
+                    "tags" : recipe.tags ?? ["NA"]] as [String : Any]
         Database.database().reference().child(BackendManager.shared.user.uid).child("recipes").child(recipe.name).updateChildValues(dict)
         
+    }
+    
+    class func getRecipesForCurrentUser(completion: @escaping (_ arrayOfRecipes: [Recipe]?)-> Void) {
+        Database.database().reference().child(BackendManager.shared.user.uid).child("recipes").observe(.value, with: { (snap) in
+            if snap.exists() { // Fetch Recipes
+                let value = snap.value as! NSDictionary
+                var arrayOfRecipes: [Recipe] = []
+                for recipe in value {
+                    let new_recipe = Recipe.init(dict: recipe.value as! NSDictionary)
+                    arrayOfRecipes.append(new_recipe)
+                }
+                completion(arrayOfRecipes)
+                BackendManager.shared.user.recipes = arrayOfRecipes
+            }
+        })
     }
     
     class func favoriteRecipe(recipe: Recipe){
@@ -102,6 +119,21 @@ class BackendManager: NSObject {
     
     class func unfavoriteRecipe(recipe: Recipe){
         Database.database().reference().child(BackendManager.shared.user.uid).child("recipes").child(recipe.name).updateChildValues(["FAVORITE": false])
+    }
+    
+    class func userLookUpByEmail (email: String, completion: @escaping (_ result: String) -> Void) {
+        var userID: String = "nil"
+        Database.database().reference().child("emails").queryOrdered(byChild: "email").queryEqual(toValue: email).observeSingleEvent(of: .childAdded, with: { snapshot in
+            if snapshot.value != nil {
+                print(snapshot.key)
+                userID = snapshot.key
+            }
+            else {
+                print ("user not found")
+                userID = "nil"
+            }
+            completion(userID)
+        })
     }
     
     

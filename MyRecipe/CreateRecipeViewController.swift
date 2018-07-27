@@ -28,6 +28,7 @@ class CreateRecipeViewController: BaseViewController, UITextViewDelegate, UITabl
     @IBOutlet weak var favoriteSwitch: UISwitch!
     @IBOutlet weak var saveRecipeButton: UIButton!
     @IBOutlet weak var blurView: UIVisualEffectView!
+    @IBOutlet weak var addTagButton: UIButton!
     var bglayer: CAGradientLayer!
     var arrayOfIngridients: [String] = []
     var arrayOfSteps: [String] = []
@@ -90,6 +91,9 @@ class CreateRecipeViewController: BaseViewController, UITextViewDelegate, UITabl
         self.tagTextField.attributedPlaceholder = NSAttributedString.init(string: "Tags  (Optional)", attributes: [NSAttributedStringKey.foregroundColor: UIColor.white])
         self.descriptionTextField.layer.cornerRadius = 8
         self.descriptionTextField.attributedPlaceholder = NSAttributedString.init(string: "Brief Description  (Optional)", attributes: [NSAttributedStringKey.foregroundColor: UIColor.white])
+        self.saveRecipeButton.layer.cornerRadius = 18
+        self.addTagButton.layer.cornerRadius = 18
+        
     }
     
     //MARK: Tableview
@@ -245,10 +249,12 @@ class CreateRecipeViewController: BaseViewController, UITextViewDelegate, UITabl
     
     @IBAction func addTagTapped(_ sender: UIButton) {
         if self.tagTextField.text != nil {
-            self.recipe.tags.append(self.tagTextField.text!)
+            self.recipe.tags!.append(self.tagTextField.text!)
         }
+        self.tagTextField.text = nil
     }
     
+    //MARK: Saving Recipe
     @IBAction func saveRecipeTapped(_ sender: UIButton) {
         if !(self.descriptionTextField.text?.isEmpty)! {
             self.recipe.briefDescription = self.descriptionTextField.text!
@@ -259,9 +265,9 @@ class CreateRecipeViewController: BaseViewController, UITextViewDelegate, UITabl
             self.saveRecipeButton.backgroundColor = UIColor.init(red: 241/255, green: 146/255, blue: 153/255, alpha: 1.0)
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            self.switchTableButton.setTitle("Recipe Saved", for: .normal)
+            self.saveRecipeButton.setTitle("Recipe Saved", for: .normal)
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
             self.dismiss(animated: true, completion: nil)
         }
     }
@@ -271,7 +277,7 @@ class CreateRecipeViewController: BaseViewController, UITextViewDelegate, UITabl
     func textViewDidBeginEditing(_ textView: UITextView) {
         if self.stepsTextView.textColor == UIColor.lightGray {
             self.stepsTextView.text = nil
-            self.stepsTextView.textColor = UIColor.black
+            self.stepsTextView.textColor = UIColor.white
         }
     }
     

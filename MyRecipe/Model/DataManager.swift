@@ -28,6 +28,17 @@ class DataManager: NSObject {
         return Recipe.init(name: "", cookingTime: 0, briefDescription: "", ingridients: [""], steps: [""], FAVORITE: false, COOKED: false, cookedCount: 0, photos: [Data.init()], dateAdded: Date.init(), tags: [""])
     }
     
+    class func getFavoritesFromCurrentUser() -> [Recipe]? {
+        let user = BackendManager.shared.user
+        var arrayOfFavorites: [Recipe]? = []
+        for recipe in user?.recipes ?? [] {
+            if recipe.FAVORITE {
+                arrayOfFavorites?.append(recipe)
+            }
+        }
+        return arrayOfFavorites
+    }
+    
     class func getDateFromString(string: String) -> Date {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd-MM-yyyy"
