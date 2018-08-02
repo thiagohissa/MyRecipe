@@ -13,7 +13,7 @@ class CreateRecipeViewController: BaseViewController, UITextViewDelegate, UITabl
     //MARK: Properties
     @IBOutlet weak var backgroundView: UIView!
     @IBOutlet weak var xibWrapView: UIView!
-    @IBOutlet weak var ingridientTextField: UITextField!
+    @IBOutlet weak var ingridientTextField: TextField!
     @IBOutlet weak var stepsTextView: UITextView!
     @IBOutlet weak var okButton: UIButton!
     @IBOutlet weak var wrapTablePopup: UIView!
@@ -62,15 +62,17 @@ class CreateRecipeViewController: BaseViewController, UITextViewDelegate, UITabl
                 view.layer.cornerRadius = 18
             }
         }
+        self.saveRecipeButton.layer.cornerRadius = 18
+        self.addTagButton.layer.cornerRadius = 18
         self.okButton.layer.cornerRadius = 18
         self.switchTableButton.layer.cornerRadius = 18
         // Text fields
-        self.recipeNameTextField.layer.cornerRadius = 8
-        self.recipeNameTextField.attributedPlaceholder = NSAttributedString.init(string: "Recipe name", attributes: [NSAttributedStringKey.foregroundColor: UIColor.white])
-        self.cookingtimeTextField.layer.cornerRadius = 8
-        self.cookingtimeTextField.attributedPlaceholder = NSAttributedString.init(string: "Cooking time in minutes", attributes: [NSAttributedStringKey.foregroundColor: UIColor.white])
-        self.ingridientTextField.layer.cornerRadius = 8
-        self.ingridientTextField.attributedPlaceholder = NSAttributedString.init(string: "Enter Ingridient here", attributes: [NSAttributedStringKey.foregroundColor: UIColor.white])
+        self.recipeNameTextField.attributedPlaceholder = NSAttributedString.init(string: "Recipe name", attributes: [NSAttributedStringKey.foregroundColor: UIColor.gray])
+        self.cookingtimeTextField.attributedPlaceholder = NSAttributedString.init(string: "Cooking time in minutes", attributes: [NSAttributedStringKey.foregroundColor: UIColor.gray])
+        self.ingridientTextField.attributedPlaceholder = NSAttributedString.init(string: "Enter Ingridient here", attributes: [NSAttributedStringKey.foregroundColor: UIColor.gray])
+        self.tagTextField.attributedPlaceholder = NSAttributedString.init(string: "Tags  (Optional)", attributes: [NSAttributedStringKey.foregroundColor: UIColor.gray])
+        self.descriptionTextField.attributedPlaceholder = NSAttributedString.init(string: "Brief Description  (Optional)", attributes: [NSAttributedStringKey.foregroundColor: UIColor.gray])
+        self.stepsTextView.layer.applySketchShadow(color: UIColor.init(red: 228/255, green: 228/255, blue: 228/255, alpha: 1.0), alpha: 0.5, x: 0, y: 2, blur: 4, radius: 2.5, spread: 5)
         self.stepsTextView.layer.cornerRadius = 18
         self.stepsTextView.text = "Enter Step Here"
         self.stepsTextView.textColor = UIColor.lightGray
@@ -87,13 +89,6 @@ class CreateRecipeViewController: BaseViewController, UITextViewDelegate, UITabl
         let shapeSRW = CAShapeLayer()
         shapeSRW.path = maskPathSRW.cgPath
         self.saveRecipeWrapView.layer.mask = shapeSRW
-        self.tagTextField.layer.cornerRadius = 8
-        self.tagTextField.attributedPlaceholder = NSAttributedString.init(string: "Tags  (Optional)", attributes: [NSAttributedStringKey.foregroundColor: UIColor.white])
-        self.descriptionTextField.layer.cornerRadius = 8
-        self.descriptionTextField.attributedPlaceholder = NSAttributedString.init(string: "Brief Description  (Optional)", attributes: [NSAttributedStringKey.foregroundColor: UIColor.white])
-        self.saveRecipeButton.layer.cornerRadius = 18
-        self.addTagButton.layer.cornerRadius = 18
-        
     }
     
     //MARK: Tableview
@@ -230,7 +225,7 @@ class CreateRecipeViewController: BaseViewController, UITextViewDelegate, UITabl
             super.presentAlert(title: "EMPTY FIELDS", message: "Make sure to have filled out all spaces and to have included at least 1 ingridient and 1 step.")
         }
         else{
-            let recipe = Recipe.init(name: self.recipeNameTextField.text!, cookingTime: Int(self.cookingtimeTextField.text!)!, briefDescription: "", ingridients: self.arrayOfIngridients, steps: self.arrayOfSteps, FAVORITE: false, COOKED: false, cookedCount: 0, photos: [Data.init()], dateAdded: Date.init(), tags: [""])
+            let recipe = Recipe.init(name: self.recipeNameTextField.text!, cookingTime: Int(self.cookingtimeTextField.text!)!, briefDescription: "", ingridients: self.arrayOfIngridients, steps: self.arrayOfSteps, FAVORITE: false, COOKED: false, cookedCount: 0, photos: [Data.init()], dateAdded: Date.init(), tags: [""], SHARED: false, sharedBy: "")
             self.recipe = recipe
             self.saveRecipeWrapView.center.x = self.view.center.x
             self.saveRecipeWrapView.center.y = 800
@@ -267,7 +262,7 @@ class CreateRecipeViewController: BaseViewController, UITextViewDelegate, UITabl
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             self.saveRecipeButton.setTitle("Recipe Saved", for: .normal)
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             self.dismiss(animated: true, completion: nil)
         }
     }
@@ -277,7 +272,7 @@ class CreateRecipeViewController: BaseViewController, UITextViewDelegate, UITabl
     func textViewDidBeginEditing(_ textView: UITextView) {
         if self.stepsTextView.textColor == UIColor.lightGray {
             self.stepsTextView.text = nil
-            self.stepsTextView.textColor = UIColor.white
+            self.stepsTextView.textColor = UIColor.black
         }
     }
     

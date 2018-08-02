@@ -18,12 +18,14 @@ class Recipe: NSObject {
     
     var FAVORITE: Bool
     var COOKED: Bool
+    var SHARED: Bool
+    var sharedBy: String
     var cookedCount: Int
     var photos: [Data]!
     var dateAdded: Date
     var tags: [String]?
     
-    init(name: String, cookingTime: Int, briefDescription: String, ingridients:[String], steps:[String], FAVORITE:Bool,COOKED: Bool, cookedCount: Int, photos:[Data], dateAdded:Date, tags:[String]) {
+    init(name: String, cookingTime: Int, briefDescription: String, ingridients:[String], steps:[String], FAVORITE:Bool,COOKED: Bool, cookedCount: Int, photos:[Data], dateAdded:Date, tags:[String], SHARED:Bool, sharedBy: String) {
         self.name = name
         self.cookingTime = cookingTime
         self.briefDescription = briefDescription
@@ -35,17 +37,21 @@ class Recipe: NSObject {
         self.photos = photos
         self.dateAdded = dateAdded
         self.tags = tags
+        self.SHARED = SHARED
+        self.sharedBy = sharedBy
     }
     
     init(dict: NSDictionary) {
         self.name = dict["name"] as! String
         self.cookingTime = dict["cookingTime"] as! Int
-        self.briefDescription = dict["briefDescription"] as! String
+        self.briefDescription = dict["briefDescription"] as? String
         self.ingridients = dict["ingridients"] as! [String]
         self.steps = dict["steps"] as! [String]
         self.FAVORITE = dict["FAVORITE"] as! Bool
         self.COOKED = dict["COOKED"] as! Bool
         self.cookedCount = dict["cookedCount"] as! Int
+        self.SHARED = dict["SHARED"] as! Bool
+        self.sharedBy = dict["sharedBy"] as! String
 //        if let photos = dict["photos"] as! [Data]! { self.photos = photos }
         self.dateAdded =  DataManager.getDateFromString(string: dict["dateAdded"] as! String)
 //        if let tags = dict["tags"] as! [String]! { self.tags = tags }

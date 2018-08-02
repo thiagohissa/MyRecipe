@@ -34,6 +34,7 @@ class RecipesViewController: UIViewController, UITableViewDataSource, UITableVie
     //Timer Properties
     var TIMER_ON: Bool!
     let timerPopUp = TimerPopUp.instanceFromNib() as! TimerPopUp
+    let shareView = ShareView.instanceFromNib()
     let grayview = GrayLayer.instanceFromNib()
     var timer: Timer?
     var hour: Int?
@@ -64,12 +65,14 @@ class RecipesViewController: UIViewController, UITableViewDataSource, UITableVie
     override func viewWillAppear(_ animated: Bool) {
         NotificationCenter.default.addObserver(self, selector: #selector(receivedNotificationToRemoveTimerPopUp), name: NSNotification.Name(rawValue: "REMOVE_TIMER_POP_UP_NOTIFICATION"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(startTimer), name: NSNotification.Name(rawValue: "START_TIMER_NOTIFICATION"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(removeShareView), name: NSNotification.Name(rawValue: "REMOVE_SHAREVIEW_NOTIFICATION"), object: nil)
     }
 
     
     override func viewWillDisappear(_ animated: Bool) {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "REMOVE_TIMER_POP_UP_NOTIFICATION"), object: nil)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "START_TIMER_NOTIFICATION"), object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "REMOVE_SHAREVIEW_NOTIFICATION"), object: nil)
     }
     
     func prepareUI(){
@@ -117,8 +120,14 @@ class RecipesViewController: UIViewController, UITableViewDataSource, UITableVie
         if !self.isCooking {
             let cell = tableView.dequeueReusableCell(withIdentifier: "Cell1") as! RecipeCell
             if self.arrayOfRecipes == nil || (self.arrayOfRecipes?.isEmpty)! {
-                cell.name.text = "You have no Recipes yet!"
-                cell.briefDescription.text = "Tap on New Recipe to create a recipe or go to the main menu and search for one."
+                if self.isFavorites {
+                    cell.name.text = "You have no Favorites yet!"
+                    cell.briefDescription.text = "Tap on the heart next to a recipe to add it to your Favorites. "
+                }
+                else {
+                    cell.name.text = "You have no Recipes yet!"
+                    cell.briefDescription.text = "Tap on New Recipe to create a recipe or go to the main menu and search for one."
+                }
                 cell.minute.text = ""
                 cell.heartButton.isHidden = true
                 cell.shareButton.isHidden = true
@@ -239,6 +248,8 @@ class RecipesViewController: UIViewController, UITableViewDataSource, UITableVie
         }
     }
     @IBAction func shareButtonTapped(_ sender: UIButton) {
+        BackendManager.shared.shareRecipe = self.arrayOfRecipes![sender.tag]
+        self.showShareView()
     }
     
     @IBAction func newRecipeTapped(_ sender: UIButton) {
@@ -402,6 +413,27 @@ class RecipesViewController: UIViewController, UITableViewDataSource, UITableVie
             self.timerButton.backgroundColor = UIColor.init(red: 56/255, green: 56/255, blue: 56/255, alpha: 1.0)
             self.timerButton.setTitleColor(UIColor.init(red: 255/255, green: 255/255, blue: 255/255, alpha: 1.0), for: .normal)
             self.timerButton.setTitle("Timer", for: .normal)
+        }
+    }
+    
+    //MARK: Share
+    func showShareView(){
+        self.shareView.center.x = self.view.center.x
+        self.shareView.center.y = 800
+        self.view.addSubview(self.grayview)
+        self.view.addSubview(self.shareView)
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 5.0, initialSpringVelocity: 3, options: UIViewAnimationOptions.curveEaseIn, animations: {
+            self.shareView.center.y = self.view.frame.height - (self.shareView.frame.height/2) - 20
+        }, completion: nil)
+    }
+    
+    @objc func removeShareView(){
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 5.0, initialSpringVelocity: 3, options: UIViewAnimationOptions.curveEaseIn, animations: {
+            self.shareView.center.y = 1200
+        }, completion: nil)
+        DispatchQueue.main.asyncAfter(deadline: .now()+0.1) {
+            self.shareView.removeFromSuperview()
+            self.grayview.removeFromSuperview()
         }
     }
     

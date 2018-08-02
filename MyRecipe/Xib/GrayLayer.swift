@@ -19,6 +19,8 @@ class GrayLayer: UIView {
         NotificationCenter.default.post(name: notificationName1, object: nil)
         let notificationName2 = Notification.Name("REMOVE_ALERT_NOTIFICATION")
         NotificationCenter.default.post(name: notificationName2, object: nil)
+        let notificationName3 = Notification.Name("REMOVE_SHAREVIEW_NOTIFICATION")
+        NotificationCenter.default.post(name: notificationName3, object: nil)
     }
     
 }

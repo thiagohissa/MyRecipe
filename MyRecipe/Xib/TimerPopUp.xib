@@ -24,7 +24,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wXi-Bl-5pG">
-                    <rect key="frame" x="16" y="262" width="319" height="36"/>
+                    <rect key="frame" x="16" y="263" width="319" height="35"/>
                     <color key="backgroundColor" red="0.94509803921568625" green="0.5725490196078431" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="20"/>
                     <state key="normal" title="Start Timer">
@@ -69,7 +69,7 @@
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="QAw-bF-BmT" secondAttribute="trailing" constant="22" id="Chr-06-DtW"/>
                 <constraint firstItem="wXi-Bl-5pG" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="IYu-tP-jyA"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="wXi-Bl-5pG" secondAttribute="trailing" constant="16" id="RT9-V5-HuB"/>
-                <constraint firstItem="wXi-Bl-5pG" firstAttribute="top" secondItem="xhz-LB-ZFh" secondAttribute="bottom" constant="26" id="TFs-Zx-Yk5"/>
+                <constraint firstItem="wXi-Bl-5pG" firstAttribute="top" secondItem="xhz-LB-ZFh" secondAttribute="bottom" constant="27" id="TFs-Zx-Yk5"/>
                 <constraint firstItem="xhz-LB-ZFh" firstAttribute="top" secondItem="QAw-bF-BmT" secondAttribute="bottom" constant="18" id="XT9-BN-Gwi"/>
                 <constraint firstItem="QAw-bF-BmT" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="31" id="Z26-Hr-YZj"/>
             </constraints>

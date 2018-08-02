@@ -17,6 +17,7 @@ class BackendManager: NSObject {
     
     static let shared = BackendManager()
     var user: User!
+    var shareRecipe: Recipe!
     
     //MARK: User Creation
     class func createUserFor(email: String, password: String, username: String, completion: @escaping (_ uid: String?,_ error: Error?) -> Void) {
@@ -93,7 +94,9 @@ class BackendManager: NSObject {
                     "cookedCount" : 0,
                     "photos" : "na",
                     "dateAdded" : dateString,
-                    "tags" : recipe.tags ?? ["NA"]] as [String : Any]
+                    "tags" : recipe.tags ?? ["NA"],
+                    "SHARED" : true,
+                    "sharedBy" : "nil"] as [String : Any]
         Database.database().reference().child(BackendManager.shared.user.uid).child("recipes").child(recipe.name).updateChildValues(dict)
         
     }
@@ -121,12 +124,30 @@ class BackendManager: NSObject {
         Database.database().reference().child(BackendManager.shared.user.uid).child("recipes").child(recipe.name).updateChildValues(["FAVORITE": false])
     }
     
-    class func userLookUpByEmail (email: String, completion: @escaping (_ result: String) -> Void) {
+    class func sendRecipeToEmail(email: String, recipe: Recipe, completion: @escaping (_ result: String) -> Void) {
         var userID: String = "nil"
         Database.database().reference().child("emails").queryOrdered(byChild: "email").queryEqual(toValue: email).observeSingleEvent(of: .childAdded, with: { snapshot in
             if snapshot.value != nil {
                 print(snapshot.key)
                 userID = snapshot.key
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "dd-MM-yyyy"
+                let currentDate = Date.init()
+                let dateString = dateFormatter.string(from: currentDate)
+                let dict = ["name" : recipe.name,
+                            "cookingTime" : recipe.cookingTime,
+                            "briefDescription" : recipe.briefDescription ?? "No description for this recipe",
+                            "ingridients" : recipe.ingridients,
+                            "steps" : recipe.steps,
+                            "FAVORITE" : false,
+                            "COOKED" : false,
+                            "cookedCount" : 0,
+                            "photos" : "na",
+                            "dateAdded" : dateString,
+                            "tags" : recipe.tags ?? ["NA"],
+                            "SHARED" : true,
+                            "sharedBy" : BackendManager.shared.user.username] as [String : Any]
+                Database.database().reference().child(userID).child("recipes").child(recipe.name).updateChildValues(dict)
             }
             else {
                 print ("user not found")
@@ -135,6 +156,7 @@ class BackendManager: NSObject {
             completion(userID)
         })
     }
+    
     
     
     

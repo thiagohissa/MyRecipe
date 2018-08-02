@@ -30,7 +30,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DaN-0T-aow">
-                    <rect key="frame" x="16" y="262" width="319" height="36"/>
+                    <rect key="frame" x="16" y="263" width="319" height="35"/>
                     <color key="backgroundColor" red="0.94509803920000002" green="0.57254901960000004" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="20"/>
                     <state key="normal" title="Got it ">
@@ -56,7 +56,7 @@
                 <constraint firstItem="DaN-0T-aow" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="4ci-c4-f0i"/>
                 <constraint firstItem="8Fl-Vf-wrv" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="31" id="Emr-rh-Oxv"/>
                 <constraint firstItem="Dlh-WP-ixQ" firstAttribute="top" secondItem="8Fl-Vf-wrv" secondAttribute="bottom" constant="25" id="NBh-D5-CQh"/>
-                <constraint firstItem="DaN-0T-aow" firstAttribute="top" secondItem="Dlh-WP-ixQ" secondAttribute="bottom" constant="32" id="Pl1-Ft-4uD"/>
+                <constraint firstItem="DaN-0T-aow" firstAttribute="top" secondItem="Dlh-WP-ixQ" secondAttribute="bottom" constant="33" id="Pl1-Ft-4uD"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="DaN-0T-aow" secondAttribute="trailing" constant="16" id="ZdU-1m-8hW"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="8Fl-Vf-wrv" secondAttribute="trailing" constant="22" id="cFY-5G-qce"/>
                 <constraint firstItem="Dlh-WP-ixQ" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="dAZ-Vs-qdc"/>

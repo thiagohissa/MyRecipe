@@ -45,6 +45,9 @@
 		7EA3F44120EBE762001B0756 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA3F44020EBE762001B0756 /* MainViewController.swift */; };
 		7EA3F44820EC09B7001B0756 /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA3F44720EC09B7001B0756 /* MenuCell.swift */; };
 		7EAD945D210A0C3C00F02620 /* SignPainter HouseScript Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7EAD945C210A0C3C00F02620 /* SignPainter HouseScript Regular.ttf */; };
+		7EAD946F21137B2500F02620 /* LayerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EAD946E21137B2500F02620 /* LayerExtension.swift */; };
+		7EAD94712113879A00F02620 /* ShareView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EAD94702113879A00F02620 /* ShareView.xib */; };
+		7EAD947321138F3900F02620 /* ShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EAD947221138F3900F02620 /* ShareView.swift */; };
 		D14C5BE6542823F3DA0044AA /* Pods_MyRecipeUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F9C58B00ECA2CE6BCA4B10C /* Pods_MyRecipeUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -110,6 +113,9 @@
 		7EA3F44020EBE762001B0756 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		7EA3F44720EC09B7001B0756 /* MenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCell.swift; sourceTree = "<group>"; };
 		7EAD945C210A0C3C00F02620 /* SignPainter HouseScript Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SignPainter HouseScript Regular.ttf"; sourceTree = "<group>"; };
+		7EAD946E21137B2500F02620 /* LayerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayerExtension.swift; sourceTree = "<group>"; };
+		7EAD94702113879A00F02620 /* ShareView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShareView.xib; sourceTree = "<group>"; };
+		7EAD947221138F3900F02620 /* ShareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareView.swift; sourceTree = "<group>"; };
 		9F9C58B00ECA2CE6BCA4B10C /* Pods_MyRecipeUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyRecipeUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A35A89C23F5986F538C5E61D /* Pods_MyRecipe.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyRecipe.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9B0FC675C96EDFC9CA958A1 /* Pods-MyRecipe.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyRecipe.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MyRecipe/Pods-MyRecipe.debug.xcconfig"; sourceTree = "<group>"; };
@@ -215,6 +221,7 @@
 		7EA3F43F20EBE67A001B0756 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				7EAD946E21137B2500F02620 /* LayerExtension.swift */,
 				7E98DEF320EFB0CB001EDD61 /* BackendManager.swift */,
 				7E6FD9E920F023E6007583A5 /* User.swift */,
 				7E3372D520F3AD3500F51865 /* UserCache.swift */,
@@ -231,6 +238,8 @@
 				7E98DEF520EFC330001EDD61 /* AlertSheet.xib */,
 				7E6C27DD20ED508D00209258 /* TimerPopUp.xib */,
 				7E6C27E320ED542700209258 /* GrayLayer.xib */,
+				7EAD94702113879A00F02620 /* ShareView.xib */,
+				7EAD947221138F3900F02620 /* ShareView.swift */,
 				7E98DEF720EFC426001EDD61 /* AlertSheetView.swift */,
 				7E6C27DF20ED531700209258 /* TimerPopUp.swift */,
 				7E6C27E120ED541E00209258 /* GrayLayer.swift */,
@@ -404,6 +413,7 @@
 				7E3372E020F688B400F51865 /* loading1.gif in Resources */,
 				7EA3F41A20EBE5F5001B0756 /* LaunchScreen.storyboard in Resources */,
 				7E6C27E620EE8B4D00209258 /* SignSignUp.storyboard in Resources */,
+				7EAD94712113879A00F02620 /* ShareView.xib in Resources */,
 				7EA3F41720EBE5F5001B0756 /* Assets.xcassets in Resources */,
 				7E3372DE20F53D8A00F51865 /* loading.gif in Resources */,
 				7EA3F41520EBE5F5001B0756 /* Main.storyboard in Resources */,
@@ -594,6 +604,7 @@
 			files = (
 				7E6C27EA20EE96B400209258 /* ColorBackgroundView.swift in Sources */,
 				7E6C27E020ED531700209258 /* TimerPopUp.swift in Sources */,
+				7EAD947321138F3900F02620 /* ShareView.swift in Sources */,
 				7EA3F44120EBE762001B0756 /* MainViewController.swift in Sources */,
 				7E8D95AD2100BFBC004D94BC /* TextField.swift in Sources */,
 				7E98DEF420EFB0CB001EDD61 /* BackendManager.swift in Sources */,
@@ -610,6 +621,7 @@
 				7E3372E620F8EAB400F51865 /* CreateRecipeViewController.swift in Sources */,
 				7E3372D620F3AD3500F51865 /* UserCache.swift in Sources */,
 				7E6C27E820EE8BA700209258 /* SignInViewController.swift in Sources */,
+				7EAD946F21137B2500F02620 /* LayerExtension.swift in Sources */,
 				7EA3F43E20EBE666001B0756 /* Color.swift in Sources */,
 				7E3372E420F69A8900F51865 /* SettingsViewController.swift in Sources */,
 			);
