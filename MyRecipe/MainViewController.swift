@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 class MainViewController: BaseViewController {
     //MARK: Properties
     var bglayer: CAGradientLayer!

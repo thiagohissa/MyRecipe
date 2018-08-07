@@ -124,37 +124,49 @@ class BackendManager: NSObject {
         Database.database().reference().child(BackendManager.shared.user.uid).child("recipes").child(recipe.name).updateChildValues(["FAVORITE": false])
     }
     
-    class func sendRecipeToEmail(email: String, recipe: Recipe, completion: @escaping (_ result: String) -> Void) {
-        var userID: String = "nil"
-        Database.database().reference().child("emails").queryOrdered(byChild: "email").queryEqual(toValue: email).observeSingleEvent(of: .childAdded, with: { snapshot in
-            if snapshot.value != nil {
-                print(snapshot.key)
-                userID = snapshot.key
-                let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "dd-MM-yyyy"
-                let currentDate = Date.init()
-                let dateString = dateFormatter.string(from: currentDate)
-                let dict = ["name" : recipe.name,
-                            "cookingTime" : recipe.cookingTime,
-                            "briefDescription" : recipe.briefDescription ?? "No description for this recipe",
-                            "ingridients" : recipe.ingridients,
-                            "steps" : recipe.steps,
-                            "FAVORITE" : false,
-                            "COOKED" : false,
-                            "cookedCount" : 0,
-                            "photos" : "na",
-                            "dateAdded" : dateString,
-                            "tags" : recipe.tags ?? ["NA"],
-                            "SHARED" : true,
-                            "sharedBy" : BackendManager.shared.user.username] as [String : Any]
-                Database.database().reference().child(userID).child("recipes").child(recipe.name).updateChildValues(dict)
+    class func saveSharedRecipe(recipe: Recipe){
+        Database.database().reference().child(BackendManager.shared.user.uid).child("recipes").child(recipe.name).updateChildValues(["SHARED": false])
+    }
+    
+    class func sendRecipeToEmail(email: String, completion: @escaping (_ errorString: String) -> Void) {
+        var errorString = "nil"
+        Auth.auth().fetchProviders(forEmail: email) { (arrayOfStrings, error) in
+            if error == nil && arrayOfStrings != nil {
+                // user found
+                Database.database().reference().child("emails").queryOrdered(byChild: "email").queryEqual(toValue: email).observeSingleEvent(of: .childAdded, with: { snapshot in
+                    if snapshot.value != nil {
+                        print(snapshot.key)
+                        let userID = snapshot.key
+                        let dateFormatter = DateFormatter()
+                        dateFormatter.dateFormat = "dd-MM-yyyy"
+                        let currentDate = Date.init()
+                        let dateString = dateFormatter.string(from: currentDate)
+                        let recipe = BackendManager.shared.shareRecipe!
+                        let dict = ["name" : recipe.name,
+                                    "cookingTime" : recipe.cookingTime,
+                                    "briefDescription" : recipe.briefDescription ?? "No description for this recipe",
+                                    "ingridients" : recipe.ingridients,
+                                    "steps" : recipe.steps,
+                                    "FAVORITE" : false,
+                                    "COOKED" : false,
+                                    "cookedCount" : 0,
+                                    "photos" : "na",
+                                    "dateAdded" : dateString,
+                                    "tags" : recipe.tags ?? ["NA"],
+                                    "SHARED" : true,
+                                    "sharedBy" : BackendManager.shared.user.username] as [String : Any]
+                        Database.database().reference().child(userID).child("recipes").child(recipe.name).updateChildValues(dict)
+                    }
+                    completion(errorString)
+                })
             }
-            else {
-                print ("user not found")
-                userID = "nil"
+            else{
+                // user not found
+                errorString = "User \(email) not found. Please make sure you've got the right email."
+                completion(errorString)
             }
-            completion(userID)
-        })
+        }
+
     }
     
     

@@ -28,7 +28,7 @@ class RecipesViewController: UIViewController, UITableViewDataSource, UITableVie
     var isFavorites: Bool!
     var bglayer: CAGradientLayer!
     var recipe: Recipe!
-    var user: User!
+//    var user: User!
     var pageTitle: String!
     
     //Timer Properties
@@ -44,12 +44,12 @@ class RecipesViewController: UIViewController, UITableViewDataSource, UITableVie
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.user = BackendManager.shared.user
+//        self.user = BackendManager.shared.user
         if isFavorites {
             arrayOfRecipes = DataManager.getFavoritesFromCurrentUser()
         }
         else{
-            arrayOfRecipes = self.user.recipes
+            arrayOfRecipes = DataManager.getRecipesFromCurrentUser()
         }
         self.selectionTitle.text = self.pageTitle
         self.isCooking = false
@@ -208,7 +208,7 @@ class RecipesViewController: UIViewController, UITableViewDataSource, UITableVie
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if (editingStyle == UITableViewCellEditingStyle.delete) {
-            // Delete Recipe
+            // TODO Delete Recipe
         }
     }
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {

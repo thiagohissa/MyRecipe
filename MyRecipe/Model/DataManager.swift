@@ -25,6 +25,28 @@ class DataManager: NSObject {
         return arrayOfFavorites
     }
     
+    class func getRecipesFromCurrentUser() -> [Recipe]? {
+        let user = BackendManager.shared.user
+        var arrayOfRecipes: [Recipe]? = []
+        for recipe in user?.recipes ?? [] {
+            if recipe.SHARED == false {
+                arrayOfRecipes?.append(recipe)
+            }
+        }
+        return arrayOfRecipes
+    }
+    
+    class func getSharedRecipesFromCurrentUser() -> [Recipe]? {
+        let user = BackendManager.shared.user
+        var arrayOfRecipes: [Recipe]? = []
+        for recipe in user?.recipes ?? [] {
+            if recipe.SHARED == true {
+                arrayOfRecipes?.append(recipe)
+            }
+        }
+        return arrayOfRecipes
+    }
+    
     class func getDateFromString(string: String) -> Date {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd-MM-yyyy"

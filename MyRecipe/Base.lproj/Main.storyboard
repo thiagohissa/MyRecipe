@@ -50,7 +50,7 @@
                                         <rect key="frame" x="115.5" y="53" width="120" height="400"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vTd-Et-rSF">
-                                                <rect key="frame" x="0.0" y="0.0" width="120" height="133.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="120" height="100"/>
                                                 <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="22"/>
                                                 <state key="normal" title="Recipes">
                                                     <color key="titleColor" red="0.92941176470588238" green="0.65490196078431373" blue="0.55686274509803924" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -60,7 +60,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8bZ-hg-acf">
-                                                <rect key="frame" x="0.0" y="133.5" width="120" height="133"/>
+                                                <rect key="frame" x="0.0" y="100" width="120" height="100"/>
                                                 <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="22"/>
                                                 <state key="normal" title="Favourites">
                                                     <color key="titleColor" red="0.92941176469999998" green="0.65490196079999996" blue="0.5568627451" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -70,7 +70,17 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oXT-n3-sL9">
-                                                <rect key="frame" x="0.0" y="266.5" width="120" height="133.5"/>
+                                                <rect key="frame" x="0.0" y="200" width="120" height="100"/>
+                                                <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="22"/>
+                                                <state key="normal" title="Shared">
+                                                    <color key="titleColor" red="0.92941176469999998" green="0.65490196079999996" blue="0.5568627451" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                </state>
+                                                <connections>
+                                                    <segue destination="igT-c4-VrS" kind="show" id="j6c-gm-zQM"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eLJ-VH-Czb">
+                                                <rect key="frame" x="0.0" y="300" width="120" height="100"/>
                                                 <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="22"/>
                                                 <state key="normal" title="Search">
                                                     <color key="titleColor" red="0.92941176469999998" green="0.65490196079999996" blue="0.5568627451" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -83,15 +93,19 @@
                                         </constraints>
                                     </stackView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon_book" translatesAutoresizingMaskIntoConstraints="NO" id="Gfp-Rn-1AL">
-                                        <rect key="frame" x="41" y="97" width="40" height="40"/>
+                                        <rect key="frame" x="41" y="83" width="40" height="40"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon_heartFull" translatesAutoresizingMaskIntoConstraints="NO" id="AWi-ga-EWv">
-                                        <rect key="frame" x="41" y="233" width="40" height="40"/>
+                                        <rect key="frame" x="41" y="183" width="40" height="40"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon_search" translatesAutoresizingMaskIntoConstraints="NO" id="xBH-NH-tS9">
-                                        <rect key="frame" x="41" y="369" width="40" height="40"/>
+                                        <rect key="frame" x="41" y="382" width="40" height="40"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon_share2" translatesAutoresizingMaskIntoConstraints="NO" id="5z2-gH-XED">
+                                        <rect key="frame" x="41" y="281" width="40" height="40"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                 </subviews>
@@ -426,8 +440,8 @@
                                         </subviews>
                                         <color key="backgroundColor" red="0.99519230769230771" green="0.99038461538461542" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                     </view>
-                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aZb-KN-Tfz">
-                                        <rect key="frame" x="203" y="26" width="35" height="35"/>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aZb-KN-Tfz">
+                                        <rect key="frame" x="203" y="20" width="35" height="35"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" image="icon_refresh"/>
                                         <connections>
@@ -527,7 +541,119 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jme-1c-rVI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1105" y="134"/>
+            <point key="canvasLocation" x="137" y="996"/>
+        </scene>
+        <!--Shared View Controller-->
+        <scene sceneID="H25-iS-USi">
+            <objects>
+                <viewController id="igT-c4-VrS" customClass="SharedViewController" customModule="MyRecipe" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Z84-th-vyi">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="background_chef" translatesAutoresizingMaskIntoConstraints="NO" id="XtZ-FW-ybc">
+                                <rect key="frame" x="0.0" y="-6" width="375" height="667"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="R9c-z0-J7e">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.39486833760000001" green="0.39486833760000001" blue="0.39486833760000001" alpha="0.86301369859999999" colorSpace="custom" customColorSpace="displayP3"/>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="niO-77-Mb9">
+                                <rect key="frame" x="12" y="14" width="351" height="635"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="SHARED" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tHP-un-znz">
+                                        <rect key="frame" x="254" y="25" width="75" height="25"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="18"/>
+                                        <color key="textColor" red="0.1529411765" green="0.1529411765" blue="0.1529411765" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Recipes sent to you!" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aq8-VV-Y6d">
+                                        <rect key="frame" x="156" y="58" width="173" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="18"/>
+                                        <color key="textColor" red="0.68235294117647061" green="0.68235294117647061" blue="0.68235294117647061" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="wWd-jM-Prp">
+                                        <rect key="frame" x="8" y="124" width="335" height="503"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <prototypes>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="100" id="DwQ-gE-7Uo" customClass="SharedCell" customModule="MyRecipe" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="28" width="335" height="100"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="DwQ-gE-7Uo" id="8E2-kN-p8K">
+                                                    <rect key="frame" x="0.0" y="0.0" width="335" height="100"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Sent by Kristy" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z3S-j6-gkH">
+                                                            <rect key="frame" x="15" y="55" width="320" height="25"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="18"/>
+                                                            <color key="textColor" red="0.68235294120000001" green="0.68235294120000001" blue="0.68235294120000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Grilled Steak" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ruS-xU-3wl">
+                                                            <rect key="frame" x="15" y="16" width="212" height="28"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="20"/>
+                                                            <color key="textColor" red="0.34901960780000002" green="0.34901960780000002" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1p7-Fl-pqZ">
+                                                            <rect key="frame" x="235" y="15" width="100" height="30"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <color key="backgroundColor" red="0.95686274509803915" green="0.5725490196078431" blue="0.61960784313725492" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                            <state key="normal" title="Save">
+                                                                <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            </state>
+                                                            <connections>
+                                                                <action selector="saveTapped:" destination="igT-c4-VrS" eventType="touchUpInside" id="dIV-wv-yyc"/>
+                                                            </connections>
+                                                        </button>
+                                                    </subviews>
+                                                </tableViewCellContentView>
+                                                <connections>
+                                                    <outlet property="name" destination="ruS-xU-3wl" id="Cqs-lQ-r9i"/>
+                                                    <outlet property="saveButton" destination="1p7-Fl-pqZ" id="heF-6y-v6s"/>
+                                                    <outlet property="sentByLabel" destination="Z3S-j6-gkH" id="pYI-fg-sxP"/>
+                                                </connections>
+                                            </tableViewCell>
+                                        </prototypes>
+                                        <connections>
+                                            <outlet property="dataSource" destination="igT-c4-VrS" id="hqW-tA-dGG"/>
+                                            <outlet property="delegate" destination="igT-c4-VrS" id="7Ik-6d-Pjs"/>
+                                        </connections>
+                                    </tableView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2de-h7-26R">
+                                <rect key="frame" x="12" y="14" width="41" height="33"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="icon_arrowleft"/>
+                                <connections>
+                                    <action selector="backTapped:" destination="Y3a-lH-8hN" eventType="touchUpInside" id="55n-4B-oA1"/>
+                                    <action selector="backTapped:" destination="igT-c4-VrS" eventType="touchUpInside" id="cK6-qU-cb8"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="gAs-dc-xJS"/>
+                    </view>
+                    <connections>
+                        <outlet property="backgroundView" destination="R9c-z0-J7e" id="Os3-xY-ZZ2"/>
+                        <outlet property="tableView" destination="wWd-jM-Prp" id="v5q-GQ-fCn"/>
+                        <outlet property="xibWrapView" destination="niO-77-Mb9" id="zYM-dF-ai7"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tKi-am-uD6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1247.2" y="994.45277361319347"/>
         </scene>
         <!--Create Recipe View Controller-->
         <scene sceneID="keB-EH-CSy">
@@ -896,7 +1022,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xkx-uU-3se" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1104.8" y="908.9955022488756"/>
+            <point key="canvasLocation" x="137" y="1772"/>
         </scene>
     </scenes>
     <resources>
