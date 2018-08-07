@@ -18,7 +18,7 @@ class DataManager: NSObject {
         let user = BackendManager.shared.user
         var arrayOfFavorites: [Recipe]? = []
         for recipe in user?.recipes ?? [] {
-            if recipe.FAVORITE {
+            if recipe.FAVORITE && recipe.SHARED == false {
                 arrayOfFavorites?.append(recipe)
             }
         }

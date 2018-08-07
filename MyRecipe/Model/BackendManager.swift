@@ -19,7 +19,7 @@ class BackendManager: NSObject {
     var user: User!
     var shareRecipe: Recipe!
     
-    //MARK: User Creation
+    //MARK: Sign In / Sign Up
     class func createUserFor(email: String, password: String, username: String, completion: @escaping (_ uid: String?,_ error: Error?) -> Void) {
         print("BackendManager User Creation - Creating user...")
         Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
@@ -42,7 +42,6 @@ class BackendManager: NSObject {
         print("BackendManager User Creation - User init data created")
     }
     
-    //MARK: Login
     class func loginUserWith(email: String, password: String, completion: @escaping (_ user: User?,_ error: Error?)-> Void){
         Auth.auth().signIn(withEmail: email, password: password) { (result, error) in
             if error == nil {
@@ -78,15 +77,20 @@ class BackendManager: NSObject {
         }
     }
     
+    //MARK: Recipes
     class func saveRecipeForCurrentUser(recipe: Recipe) {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd-MM-yyyy"
         let currentDate = Date.init()
         let dateString = dateFormatter.string(from: currentDate)
         
+        if recipe.briefDescription == "" {
+            recipe.briefDescription = "No description for this recipe"
+        }
+        
         let dict = ["name" : recipe.name,
                     "cookingTime" : recipe.cookingTime,
-                    "briefDescription" : recipe.briefDescription ?? "No description for this recipe",
+                    "briefDescription" : recipe.briefDescription!,
                     "ingridients" : recipe.ingridients,
                     "steps" : recipe.steps,
                     "FAVORITE" : false,
@@ -95,10 +99,10 @@ class BackendManager: NSObject {
                     "photos" : "na",
                     "dateAdded" : dateString,
                     "tags" : recipe.tags ?? ["NA"],
-                    "SHARED" : true,
+                    "SHARED" : false,
                     "sharedBy" : "nil"] as [String : Any]
         Database.database().reference().child(BackendManager.shared.user.uid).child("recipes").child(recipe.name).updateChildValues(dict)
-        
+        BackendManager.shared.user.recipes?.append(recipe)
     }
     
     class func getRecipesForCurrentUser(completion: @escaping (_ arrayOfRecipes: [Recipe]?)-> Void) {
@@ -118,14 +122,38 @@ class BackendManager: NSObject {
     
     class func favoriteRecipe(recipe: Recipe){
         Database.database().reference().child(BackendManager.shared.user.uid).child("recipes").child(recipe.name).updateChildValues(["FAVORITE": true])
+        for somerecipe in BackendManager.shared.user.recipes! {
+            if somerecipe == recipe {
+                recipe.FAVORITE = true
+            }
+        }
     }
     
     class func unfavoriteRecipe(recipe: Recipe){
         Database.database().reference().child(BackendManager.shared.user.uid).child("recipes").child(recipe.name).updateChildValues(["FAVORITE": false])
+        for somerecipe in BackendManager.shared.user.recipes! {
+            if somerecipe == recipe {
+                recipe.FAVORITE = false
+            }
+        }
+    }
+    
+    class func deleteRecipe(recipe: Recipe){
+        Database.database().reference().child(BackendManager.shared.user.uid).child("recipes").child(recipe.name).removeValue()
+        for i in 0..<BackendManager.shared.user.recipes!.count {
+            if recipe == BackendManager.shared.user.recipes![i] {
+                BackendManager.shared.user.recipes?.remove(at: i)
+            }
+        }
     }
     
     class func saveSharedRecipe(recipe: Recipe){
         Database.database().reference().child(BackendManager.shared.user.uid).child("recipes").child(recipe.name).updateChildValues(["SHARED": false])
+        for somerecipe in BackendManager.shared.user.recipes! {
+            if somerecipe == recipe {
+                recipe.SHARED = false
+            }
+        }
     }
     
     class func sendRecipeToEmail(email: String, completion: @escaping (_ errorString: String) -> Void) {

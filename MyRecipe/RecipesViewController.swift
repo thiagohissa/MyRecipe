@@ -28,7 +28,6 @@ class RecipesViewController: UIViewController, UITableViewDataSource, UITableVie
     var isFavorites: Bool!
     var bglayer: CAGradientLayer!
     var recipe: Recipe!
-//    var user: User!
     var pageTitle: String!
     
     //Timer Properties
@@ -44,7 +43,6 @@ class RecipesViewController: UIViewController, UITableViewDataSource, UITableVie
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        self.user = BackendManager.shared.user
         if isFavorites {
             arrayOfRecipes = DataManager.getFavoritesFromCurrentUser()
         }
@@ -209,6 +207,8 @@ class RecipesViewController: UIViewController, UITableViewDataSource, UITableVie
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if (editingStyle == UITableViewCellEditingStyle.delete) {
             // TODO Delete Recipe
+//            self.tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
+            BackendManager.deleteRecipe(recipe: self.arrayOfRecipes![indexPath.section])
         }
     }
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
@@ -287,6 +287,7 @@ class RecipesViewController: UIViewController, UITableViewDataSource, UITableVie
         UIView.animate(withDuration: 1, animations: {
             self.tableView.alpha = 0
         })
+        // TODO: it shouldnt be necessary to call a function. Make sure after each BackendManager call, we update the BackendManager.shared.user.recipes array
         BackendManager.getRecipesForCurrentUser { (arrayOfRecipes) in
             self.arrayOfRecipes = arrayOfRecipes
             self.tableView.reloadData()
@@ -445,6 +446,12 @@ class RecipeCell: UITableViewCell {
     @IBOutlet weak var briefDescription: UILabel!
     @IBOutlet weak var heartButton: UIButton!
     @IBOutlet weak var shareButton: UIButton!
+    @IBOutlet weak var wrapView: UIView!
+    
+    override func awakeFromNib() {
+        self.wrapView.layer.applySketchShadow(color: UIColor.init(red: 228/255, green: 228/255, blue: 228/255, alpha: 1.0), alpha: 0.5, x: 0, y: 2, blur: 4, radius: 2.5, spread: 0)
+        self.wrapView.layer.cornerRadius = 18
+    }
     
 }
 

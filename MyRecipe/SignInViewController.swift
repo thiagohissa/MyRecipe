@@ -69,7 +69,6 @@ class SignInViewController: BaseViewController {
             let password = self.passwordTextField.text!
             BackendManager.loginUserWith(email: email, password: password, completion: { (user, error) in
                 if user != nil {
-                    // User.sharedUser = TODO: user  We need an user cache
                     let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "MainViewController") as! MainViewController
                     self.present(vc, animated: true, completion: nil)
                 }
