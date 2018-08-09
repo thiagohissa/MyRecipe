@@ -131,14 +131,15 @@ class RecipesViewController: UIViewController, UITableViewDataSource, UITableVie
                 cell.shareButton.isHidden = true
             }
             else{
-                cell.name.text = "\(self.arrayOfRecipes![indexPath.section].name) "
-                cell.briefDescription.text = self.arrayOfRecipes![indexPath.section].briefDescription
-                cell.minute.text = "Ready in \(String(self.arrayOfRecipes![indexPath.section].cookingTime))min"
+                let thisrecipe = self.arrayOfRecipes![indexPath.section]
+                cell.name.text = "\(thisrecipe.name) "
+                cell.briefDescription.text = thisrecipe.briefDescription
+                cell.minute.text = "Ready in \(String(thisrecipe.cookingTime))min"
                 cell.heartButton.isHidden = false
                 cell.shareButton.isHidden = false
                 cell.heartButton.tag = indexPath.section
                 cell.shareButton.tag = indexPath.section
-                if !self.arrayOfRecipes![indexPath.section].FAVORITE { cell.heartButton.setImage(UIImage.init(named: "icon_heartEmpty"), for: .normal) }
+                if !thisrecipe.FAVORITE { cell.heartButton.setImage(UIImage.init(named: "icon_heartEmpty"), for: .normal) }
                 else { cell.heartButton.setImage(UIImage.init(named: "icon_heartFull"), for: .normal) }
             }
             cell.updateConstraintsIfNeeded()

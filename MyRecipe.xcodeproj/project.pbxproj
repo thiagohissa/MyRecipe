@@ -49,6 +49,7 @@
 		7EAD94712113879A00F02620 /* ShareView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EAD94702113879A00F02620 /* ShareView.xib */; };
 		7EAD947321138F3900F02620 /* ShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EAD947221138F3900F02620 /* ShareView.swift */; };
 		7EAD947521188C8F00F02620 /* SharedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EAD947421188C8F00F02620 /* SharedViewController.swift */; };
+		7EAD9477211C800600F02620 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EAD9476211C800600F02620 /* SearchViewController.swift */; };
 		D14C5BE6542823F3DA0044AA /* Pods_MyRecipeUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F9C58B00ECA2CE6BCA4B10C /* Pods_MyRecipeUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -118,6 +119,7 @@
 		7EAD94702113879A00F02620 /* ShareView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShareView.xib; sourceTree = "<group>"; };
 		7EAD947221138F3900F02620 /* ShareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareView.swift; sourceTree = "<group>"; };
 		7EAD947421188C8F00F02620 /* SharedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedViewController.swift; sourceTree = "<group>"; };
+		7EAD9476211C800600F02620 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		9F9C58B00ECA2CE6BCA4B10C /* Pods_MyRecipeUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyRecipeUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A35A89C23F5986F538C5E61D /* Pods_MyRecipe.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyRecipe.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9B0FC675C96EDFC9CA958A1 /* Pods-MyRecipe.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyRecipe.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MyRecipe/Pods-MyRecipe.debug.xcconfig"; sourceTree = "<group>"; };
@@ -178,6 +180,7 @@
 		7EA3F40E20EBE5F5001B0756 /* MyRecipe */ = {
 			isa = PBXGroup;
 			children = (
+				7EAD9476211C800600F02620 /* SearchViewController.swift */,
 				7EA3F40F20EBE5F5001B0756 /* AppDelegate.swift */,
 				7E6C27E720EE8BA700209258 /* SignInViewController.swift */,
 				7E6C27EB20EE984B00209258 /* SignUpViewController.swift */,
@@ -623,6 +626,7 @@
 				7E08D96F20EC12A3002F68D8 /* RecipesViewController.swift in Sources */,
 				7E3372E620F8EAB400F51865 /* CreateRecipeViewController.swift in Sources */,
 				7E3372D620F3AD3500F51865 /* UserCache.swift in Sources */,
+				7EAD9477211C800600F02620 /* SearchViewController.swift in Sources */,
 				7EAD947521188C8F00F02620 /* SharedViewController.swift in Sources */,
 				7E6C27E820EE8BA700209258 /* SignInViewController.swift in Sources */,
 				7EAD946F21137B2500F02620 /* LayerExtension.swift in Sources */,
