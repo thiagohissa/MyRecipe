@@ -24,11 +24,12 @@ class RecipesViewController: UIViewController, UITableViewDataSource, UITableVie
     @IBOutlet weak var ingridientsCollectionWrapView: UIView!
     @IBOutlet weak var ingridientsCollectionView: UICollectionView!
     @IBOutlet weak var refreshButton: UIButton!
+    var bglayer: CAGradientLayer!
     var arrayOfRecipes: [Recipe]?
     var isFavorites: Bool!
-    var bglayer: CAGradientLayer!
     var recipe: Recipe!
     var pageTitle: String!
+    var indexesTapped: [Int]!
     
     //Timer Properties
     var TIMER_ON: Bool!
@@ -44,11 +45,12 @@ class RecipesViewController: UIViewController, UITableViewDataSource, UITableVie
     override func viewDidLoad() {
         super.viewDidLoad()
         if isFavorites {
-            arrayOfRecipes = DataManager.getFavoritesFromCurrentUser()
+            self.arrayOfRecipes = DataManager.getFavoritesFromCurrentUser()
         }
         else{
-            arrayOfRecipes = DataManager.getRecipesFromCurrentUser()
+            self.arrayOfRecipes = DataManager.getRecipesFromCurrentUser()
         }
+        self.indexesTapped = [-1]
         self.selectionTitle.text = self.pageTitle
         self.isCooking = false
         self.prepareUI()
@@ -61,6 +63,13 @@ class RecipesViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        if isFavorites {
+            self.arrayOfRecipes = DataManager.getFavoritesFromCurrentUser()
+        }
+        else{
+            self.arrayOfRecipes = DataManager.getRecipesFromCurrentUser()
+        }
+        self.tableView.reloadData()
         NotificationCenter.default.addObserver(self, selector: #selector(receivedNotificationToRemoveTimerPopUp), name: NSNotification.Name(rawValue: "REMOVE_TIMER_POP_UP_NOTIFICATION"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(startTimer), name: NSNotification.Name(rawValue: "START_TIMER_NOTIFICATION"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(removeShareView), name: NSNotification.Name(rawValue: "REMOVE_SHAREVIEW_NOTIFICATION"), object: nil)
@@ -129,6 +138,7 @@ class RecipesViewController: UIViewController, UITableViewDataSource, UITableVie
                 cell.minute.text = ""
                 cell.heartButton.isHidden = true
                 cell.shareButton.isHidden = true
+                cell.clockIcon.isHidden = true
             }
             else{
                 let thisrecipe = self.arrayOfRecipes![indexPath.section]
@@ -137,6 +147,7 @@ class RecipesViewController: UIViewController, UITableViewDataSource, UITableVie
                 cell.minute.text = "Ready in \(String(thisrecipe.cookingTime))min"
                 cell.heartButton.isHidden = false
                 cell.shareButton.isHidden = false
+                cell.clockIcon.isHidden = false
                 cell.heartButton.tag = indexPath.section
                 cell.shareButton.tag = indexPath.section
                 if !thisrecipe.FAVORITE { cell.heartButton.setImage(UIImage.init(named: "icon_heartEmpty"), for: .normal) }
@@ -154,6 +165,12 @@ class RecipesViewController: UIViewController, UITableViewDataSource, UITableVie
             else{
                 cell.stepText.text = self.recipe.steps[indexPath.section]
                 cell.stepLabelCount.text = "Step \(indexPath.section+1)"
+            } // cell.circleView.backgroundColor = UIColor.init(red: 244/255, green: 146/255, blue: 158/255, alpha: 1.0)
+            cell.circleView.backgroundColor = UIColor.white
+            for i in self.indexesTapped {
+                if indexPath.section == i {
+                    cell.circleView.backgroundColor = UIColor.init(red: 244/255, green: 146/255, blue: 158/255, alpha: 1.0)
+                }
             }
             cell.updateConstraintsIfNeeded()
             return cell
@@ -191,6 +208,7 @@ class RecipesViewController: UIViewController, UITableViewDataSource, UITableVie
         }
         else if self.arrayOfRecipes != nil{ // User is tapping on Step
             if indexPath.section < self.recipe.steps.count {
+                self.indexesTapped.append(indexPath.section)
                 let cell = self.tableView.cellForRow(at: indexPath) as! CookingCell
                 cell.circleView.backgroundColor = UIColor.init(red: 244/255, green: 146/255, blue: 158/255, alpha: 1.0)
                 let scrollIndex = IndexPath.init(row: indexPath.row, section: indexPath.section+1)
@@ -207,9 +225,9 @@ class RecipesViewController: UIViewController, UITableViewDataSource, UITableVie
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if (editingStyle == UITableViewCellEditingStyle.delete) {
-            // TODO Delete Recipe
-//            self.tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
             BackendManager.deleteRecipe(recipe: self.arrayOfRecipes![indexPath.section])
+            self.arrayOfRecipes?.remove(at: indexPath.section)
+            self.tableView.reloadData()
         }
     }
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
@@ -280,26 +298,26 @@ class RecipesViewController: UIViewController, UITableViewDataSource, UITableVie
         self.presentTimerPopUp()
     }
     
-    @IBAction func refreshTapped(_ sender: UIButton) {
-        // TODO: Animate button (make it rotate while fetching new recipes)
-        UIView.animate(withDuration: 1, delay: 0, options: .repeat, animations: {
-            self.refreshButton.transform = CGAffineTransform(rotationAngle: 360)
-        }, completion: nil)
-        UIView.animate(withDuration: 1, animations: {
-            self.tableView.alpha = 0
-        })
-        // TODO: it shouldnt be necessary to call a function. Make sure after each BackendManager call, we update the BackendManager.shared.user.recipes array
-        BackendManager.getRecipesForCurrentUser { (arrayOfRecipes) in
-            self.arrayOfRecipes = arrayOfRecipes
-            self.tableView.reloadData()
-            UIView.animate(withDuration: 1.5, animations: {
-                self.tableView.alpha = 1
-            })
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
-                self.refreshButton.layer.removeAllAnimations()
-            })
-        }
-    }
+//    @IBAction func refreshTapped(_ sender: UIButton) {
+//        // TODO: Animate button (make it rotate while fetching new recipes)
+//        UIView.animate(withDuration: 1, delay: 0, options: .repeat, animations: {
+//            self.refreshButton.transform = CGAffineTransform(rotationAngle: 360)
+//        }, completion: nil)
+//        UIView.animate(withDuration: 1, animations: {
+//            self.tableView.alpha = 0
+//        })
+//        // TODO: it shouldnt be necessary to call a function. Make sure after each BackendManager call, we update the BackendManager.shared.user.recipes array
+//        BackendManager.getRecipesForCurrentUser { (arrayOfRecipes) in
+//            self.arrayOfRecipes = arrayOfRecipes
+//            self.tableView.reloadData()
+//            UIView.animate(withDuration: 1.5, animations: {
+//                self.tableView.alpha = 1
+//            })
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
+//                self.refreshButton.layer.removeAllAnimations()
+//            })
+//        }
+//    }
     
     
     //MARK: Timer
@@ -448,6 +466,7 @@ class RecipeCell: UITableViewCell {
     @IBOutlet weak var heartButton: UIButton!
     @IBOutlet weak var shareButton: UIButton!
     @IBOutlet weak var wrapView: UIView!
+    @IBOutlet weak var clockIcon: UIImageView!
     
     override func awakeFromNib() {
         self.wrapView.layer.applySketchShadow(color: UIColor.init(red: 228/255, green: 228/255, blue: 228/255, alpha: 1.0), alpha: 0.5, x: 0, y: 2, blur: 4, radius: 2.5, spread: 0)

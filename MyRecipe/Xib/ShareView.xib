@@ -44,8 +44,8 @@
                     <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="20"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                 </textView>
-                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter recipient’s email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rrC-5q-A9f" customClass="TextField" customModule="MyRecipe" customModuleProvider="target">
-                    <rect key="frame" x="16" y="254" width="185.5" height="35"/>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Recipient’s email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rrC-5q-A9f" customClass="TextField" customModule="MyRecipe" customModuleProvider="target">
+                    <rect key="frame" x="13" y="254" width="192.5" height="35"/>
                     <nil key="textColor"/>
                     <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="18"/>
                     <textInputTraits key="textInputTraits"/>
@@ -53,6 +53,9 @@
                 <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K1r-7x-7Gl">
                     <rect key="frame" x="213.5" y="254" width="121.5" height="35"/>
                     <color key="backgroundColor" red="0.94509803920000002" green="0.57254901960000004" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="121.5" id="xto-EC-Y5V"/>
+                    </constraints>
                     <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="20"/>
                     <state key="normal" title="Send">
                         <color key="titleColor" red="0.9951923077" green="0.9903846154" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -64,17 +67,17 @@
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="rrC-5q-A9f" secondAttribute="bottom" constant="21" id="9C2-Cv-itw"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="K1r-7x-7Gl" secondAttribute="bottom" constant="21" id="9qx-Bj-vpl"/>
-                <constraint firstItem="rrC-5q-A9f" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="WJL-iO-aek"/>
-                <constraint firstItem="K1r-7x-7Gl" firstAttribute="top" secondItem="97u-rF-mKP" secondAttribute="bottom" constant="52" id="X8w-lU-2pl"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="K1r-7x-7Gl" secondAttribute="trailing" constant="16" id="03g-Qm-9X6"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="rrC-5q-A9f" secondAttribute="bottom" constant="21" id="4PA-U3-399"/>
+                <constraint firstItem="K1r-7x-7Gl" firstAttribute="top" secondItem="97u-rF-mKP" secondAttribute="bottom" constant="52" id="5kS-nW-LFv"/>
+                <constraint firstItem="K1r-7x-7Gl" firstAttribute="leading" secondItem="rrC-5q-A9f" secondAttribute="trailing" constant="8" id="BZu-P3-qd7"/>
+                <constraint firstItem="rrC-5q-A9f" firstAttribute="top" secondItem="97u-rF-mKP" secondAttribute="bottom" constant="52" id="Gb5-bR-ue0"/>
+                <constraint firstItem="rrC-5q-A9f" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="13" id="R7I-QL-fEA"/>
                 <constraint firstItem="97u-rF-mKP" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="d24-rA-Gsw"/>
                 <constraint firstItem="9GO-Rn-EPe" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="31" id="iNe-06-qje"/>
-                <constraint firstItem="K1r-7x-7Gl" firstAttribute="leading" secondItem="rrC-5q-A9f" secondAttribute="trailing" constant="12" id="iPq-Sr-eML"/>
-                <constraint firstItem="rrC-5q-A9f" firstAttribute="top" secondItem="97u-rF-mKP" secondAttribute="bottom" constant="52" id="oaB-ub-B5s"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="K1r-7x-7Gl" secondAttribute="bottom" constant="21" id="pZE-Wg-qsC"/>
                 <constraint firstItem="97u-rF-mKP" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="qIc-zL-LAC"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="9GO-Rn-EPe" secondAttribute="trailing" constant="22" id="r1G-7i-0c8"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="K1r-7x-7Gl" secondAttribute="trailing" constant="16" id="ypZ-Vu-IKi"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>

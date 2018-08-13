@@ -31,6 +31,8 @@
 		7E6C27EF20EFACED00209258 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7E6C27ED20EFACEC00209258 /* GoogleService-Info.plist */; };
 		7E6C27F020EFACED00209258 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7E6C27ED20EFACEC00209258 /* GoogleService-Info.plist */; };
 		7E6FD9EA20F023E6007583A5 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6FD9E920F023E6007583A5 /* User.swift */; };
+		7E78B9DD21221CBB002EDF6C /* CustomButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E78B9DC21221CBB002EDF6C /* CustomButtons.swift */; };
+		7E78B9DF21222B4C002EDF6C /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E78B9DE21222B4C002EDF6C /* APIManager.swift */; };
 		7E8D95AD2100BFBC004D94BC /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8D95AC2100BFBC004D94BC /* TextField.swift */; };
 		7E98DEF420EFB0CB001EDD61 /* BackendManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E98DEF320EFB0CB001EDD61 /* BackendManager.swift */; };
 		7E98DEF620EFC330001EDD61 /* AlertSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E98DEF520EFC330001EDD61 /* AlertSheet.xib */; };
@@ -95,6 +97,8 @@
 		7E6C27EB20EE984B00209258 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		7E6C27ED20EFACEC00209258 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7E6FD9E920F023E6007583A5 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		7E78B9DC21221CBB002EDF6C /* CustomButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButtons.swift; sourceTree = "<group>"; };
+		7E78B9DE21222B4C002EDF6C /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		7E8D95AC2100BFBC004D94BC /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 		7E98DEF320EFB0CB001EDD61 /* BackendManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackendManager.swift; sourceTree = "<group>"; };
 		7E98DEF520EFC330001EDD61 /* AlertSheet.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlertSheet.xib; sourceTree = "<group>"; };
@@ -227,6 +231,7 @@
 		7EA3F43F20EBE67A001B0756 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				7E78B9DE21222B4C002EDF6C /* APIManager.swift */,
 				7EAD946E21137B2500F02620 /* LayerExtension.swift */,
 				7E98DEF320EFB0CB001EDD61 /* BackendManager.swift */,
 				7E6FD9E920F023E6007583A5 /* User.swift */,
@@ -256,6 +261,7 @@
 		7EA3F44920EC09BE001B0756 /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
+				7E78B9DC21221CBB002EDF6C /* CustomButtons.swift */,
 				7E8D95AC2100BFBC004D94BC /* TextField.swift */,
 				7E3372D720F3D21100F51865 /* BaseViewController.swift */,
 				7E6C27E920EE96B400209258 /* ColorBackgroundView.swift */,
@@ -617,6 +623,8 @@
 				7EA3F41020EBE5F5001B0756 /* AppDelegate.swift in Sources */,
 				7E98DEF820EFC426001EDD61 /* AlertSheetView.swift in Sources */,
 				7E6C27E220ED541E00209258 /* GrayLayer.swift in Sources */,
+				7E78B9DD21221CBB002EDF6C /* CustomButtons.swift in Sources */,
+				7E78B9DF21222B4C002EDF6C /* APIManager.swift in Sources */,
 				7E3372D820F3D21100F51865 /* BaseViewController.swift in Sources */,
 				7EA3F44820EC09B7001B0756 /* MenuCell.swift in Sources */,
 				7E6FD9EA20F023E6007583A5 /* User.swift in Sources */,

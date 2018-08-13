@@ -93,7 +93,7 @@ class BackendManager: NSObject {
                     "briefDescription" : recipe.briefDescription!,
                     "ingridients" : recipe.ingridients,
                     "steps" : recipe.steps,
-                    "FAVORITE" : false,
+                    "FAVORITE" : recipe.FAVORITE,
                     "COOKED" : false,
                     "cookedCount" : 0,
                     "photos" : "na",
@@ -140,7 +140,7 @@ class BackendManager: NSObject {
     
     class func deleteRecipe(recipe: Recipe){
         Database.database().reference().child(BackendManager.shared.user.uid).child("recipes").child(recipe.name).removeValue()
-        for i in 0..<BackendManager.shared.user.recipes!.count {
+        for i in 0..<BackendManager.shared.user.recipes!.count{
             if recipe == BackendManager.shared.user.recipes![i] {
                 BackendManager.shared.user.recipes?.remove(at: i)
             }
@@ -172,7 +172,7 @@ class BackendManager: NSObject {
                         let recipe = BackendManager.shared.shareRecipe!
                         let dict = ["name" : recipe.name,
                                     "cookingTime" : recipe.cookingTime,
-                                    "briefDescription" : recipe.briefDescription ?? "No description for this recipe",
+                                    "briefDescription" : "Sent by \(BackendManager.shared.user.username)",
                                     "ingridients" : recipe.ingridients,
                                     "steps" : recipe.steps,
                                     "FAVORITE" : false,

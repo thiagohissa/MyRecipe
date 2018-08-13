@@ -130,11 +130,9 @@ class CreateRecipeViewController: BaseViewController, UITextViewDelegate, UITabl
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if (editingStyle == UITableViewCellEditingStyle.delete) {
             if self.isIngridients {
-                print("Delete this row for ingridients")
                 self.arrayOfIngridients.remove(at: indexPath.section)
             }
             else{
-                print("Delete this row for steps")
                 self.arrayOfSteps.remove(at: indexPath.section)
             }
             self.previewTable.reloadData()
