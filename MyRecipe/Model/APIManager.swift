@@ -7,4 +7,16 @@
 //
 
 import Foundation
+import Alamofire
 
+class APIManager: NSObject { // For 2.0 Version
+    
+//    class func getRecipesForKeys(keys: String, completion: (_ result: String)->Void) {
+//        Alamofire.request("http...").responseJSON { (response) in
+//            guard let json = response.result.value else {
+//                return
+//            }
+//        }
+//    }
+    
+}

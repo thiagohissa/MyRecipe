@@ -20,7 +20,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
-        application.isStatusBarHidden = true
+        application.isStatusBarHidden = false
+        application.statusBarStyle = .lightContent
         IQKeyboardManager.shared.enable = true
         self.checkIUserIsSignIn()
         return true

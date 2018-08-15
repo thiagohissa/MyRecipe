@@ -14,7 +14,6 @@ class RecipesViewController: UIViewController, UITableViewDataSource, UITableVie
     var isCooking: Bool!
     var isIngridientOn: Bool!
     @IBOutlet weak var selectionTitle: UILabel!
-    @IBOutlet weak var backgroundView: UIView!
     @IBOutlet weak var xibWrapView: UIView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var newRecipeButton: UIButton!
@@ -23,7 +22,6 @@ class RecipesViewController: UIViewController, UITableViewDataSource, UITableVie
     @IBOutlet weak var ingridientsButton: UIButton!
     @IBOutlet weak var ingridientsCollectionWrapView: UIView!
     @IBOutlet weak var ingridientsCollectionView: UICollectionView!
-    @IBOutlet weak var refreshButton: UIButton!
     var bglayer: CAGradientLayer!
     var arrayOfRecipes: [Recipe]?
     var isFavorites: Bool!
@@ -85,16 +83,8 @@ class RecipesViewController: UIViewController, UITableViewDataSource, UITableVie
     func prepareUI(){
         // BG Color
         let gradientcolor = Color.init(top: UIColor.init(red: 254/255, green: 184/255, blue: 141/255, alpha: 0.8), bottom: UIColor.init(red: 246/255, green: 133/255, blue: 148/255, alpha: 0.8))
-        self.backgroundView.backgroundColor = UIColor.clear
         self.bglayer = gradientcolor.gl
         self.bglayer.frame = self.view.frame
-        self.backgroundView.layer.insertSublayer(bglayer, at: 0)
-        // Xib Wrapper Edge
-        self.xibWrapView.layer.cornerRadius = 8
-        let maskPath = UIBezierPath(roundedRect: self.xibWrapView.bounds, byRoundingCorners: [.topLeft], cornerRadii: CGSize(width: 100, height: 100))
-        let shape = CAShapeLayer()
-        shape.path = maskPath.cgPath
-        self.xibWrapView.layer.mask = shape
         // Buttons
         self.newRecipeButton.layer.cornerRadius = 18
         self.timerButton.layer.cornerRadius = 18
@@ -165,11 +155,11 @@ class RecipesViewController: UIViewController, UITableViewDataSource, UITableVie
             else{
                 cell.stepText.text = self.recipe.steps[indexPath.section]
                 cell.stepLabelCount.text = "Step \(indexPath.section+1)"
-            } // cell.circleView.backgroundColor = UIColor.init(red: 244/255, green: 146/255, blue: 158/255, alpha: 1.0)
+            }
             cell.circleView.backgroundColor = UIColor.white
             for i in self.indexesTapped {
                 if indexPath.section == i {
-                    cell.circleView.backgroundColor = UIColor.init(red: 244/255, green: 146/255, blue: 158/255, alpha: 1.0)
+                    cell.circleView.backgroundColor = UIColor.init(red: 161/255, green: 44/255, blue: 44/255, alpha: 1.0)
                 }
             }
             cell.updateConstraintsIfNeeded()
@@ -190,7 +180,6 @@ class RecipesViewController: UIViewController, UITableViewDataSource, UITableVie
             self.isCooking = true
             self.bottomButtonStack.alpha = 0
             self.bottomButtonStack.isHidden = false
-            self.refreshButton.isHidden = true
             UIView.animate(withDuration: 1, animations: {
                 self.tableView.alpha = 0
                 self.selectionTitle.alpha = 0
@@ -210,7 +199,7 @@ class RecipesViewController: UIViewController, UITableViewDataSource, UITableVie
             if indexPath.section < self.recipe.steps.count {
                 self.indexesTapped.append(indexPath.section)
                 let cell = self.tableView.cellForRow(at: indexPath) as! CookingCell
-                cell.circleView.backgroundColor = UIColor.init(red: 244/255, green: 146/255, blue: 158/255, alpha: 1.0)
+                cell.circleView.backgroundColor = UIColor.init(red: 161/255, green: 44/255, blue: 44/255, alpha: 1.0)
                 let scrollIndex = IndexPath.init(row: indexPath.row, section: indexPath.section+1)
                 self.tableView.scrollToRow(at: scrollIndex, at: UITableViewScrollPosition.top, animated: true)
             }
@@ -282,7 +271,8 @@ class RecipesViewController: UIViewController, UITableViewDataSource, UITableVie
             UIView.animate(withDuration: 0.5, animations: {
                 self.ingridientsCollectionView.alpha = 1
                 self.ingridientsCollectionWrapView.alpha = 1
-                self.ingridientsButton.backgroundColor = UIColor.init(red: 246/255, green: 133/255, blue: 148/255, alpha: 1.0)
+                self.ingridientsButton.setTitleColor(UIColor.white, for: .normal)
+                self.ingridientsButton.backgroundColor = UIColor.init(red: 161/255, green: 44/255, blue: 44/255, alpha: 1.0)
             })
         }
         else{
@@ -290,7 +280,8 @@ class RecipesViewController: UIViewController, UITableViewDataSource, UITableVie
             UIView.animate(withDuration: 0.5, animations: {
                 self.ingridientsCollectionView.alpha = 0
                 self.ingridientsCollectionWrapView.alpha = 0
-                self.ingridientsButton.backgroundColor = UIColor.init(red: 56/255, green: 56/255, blue: 56/255, alpha: 1.0)
+                self.ingridientsButton.setTitleColor(UIColor.init(red: 161/255, green: 44/255, blue: 44/255, alpha: 1.0), for: .normal)
+                self.ingridientsButton.backgroundColor = UIColor.white
             })
         }
     }
@@ -358,8 +349,8 @@ class RecipesViewController: UIViewController, UITableViewDataSource, UITableVie
         if self.TIMER_ON {
             self.timer?.invalidate()
             self.timer = nil
-            self.timerButton.backgroundColor = UIColor.init(red: 56/255, green: 56/255, blue: 56/255, alpha: 1.0)
-//            self.timerButton.setTitleColor(UIColor.init(red: 255/255, green: 255/255, blue: 255/255, alpha: 1.0), for: .normal)
+            self.timerButton.backgroundColor = UIColor.white
+            self.timerButton.setTitleColor(UIColor.init(red: 161/255, green: 44/255, blue: 44/255, alpha: 1.0), for: .normal)
             self.timerButton.setTitle("Timer", for: .normal)
             self.TIMER_ON = false
         }
@@ -368,17 +359,15 @@ class RecipesViewController: UIViewController, UITableViewDataSource, UITableVie
             let calendar = NSCalendar.current
             let components = calendar.dateComponents([.hour, .minute, .second], from: date)
             let currentDate = calendar.date(from: components)
-            // here we set the due date. When the timer is supposed to finish
             let timerDate = self.timerPopUp.datePicker.date
-            // Here we compare the two dates
             let difference = timerDate.timeIntervalSince(currentDate!)
             let differenceDate = Date.init(timeInterval: difference, since: currentDate!)
             let differenceComponents = calendar.dateComponents([.hour,.minute,.second], from: differenceDate)
             self.hour = differenceComponents.hour ?? 0
             self.minute = differenceComponents.minute ?? 0
             self.second = 0
-            // UI
-            self.timerButton.backgroundColor = UIColor.init(red: 246/255, green: 133/255, blue: 148/255, alpha: 1.0)
+            self.timerButton.backgroundColor = UIColor.init(red: 161/255, green: 44/255, blue: 44/255, alpha: 1.0)
+            self.timerButton.setTitleColor(UIColor.white, for: .normal)
             if self.timer == nil {
                 self.timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timerRunDown), userInfo: nil, repeats: true)
             }
@@ -470,7 +459,7 @@ class RecipeCell: UITableViewCell {
     
     override func awakeFromNib() {
         self.wrapView.layer.applySketchShadow(color: UIColor.init(red: 228/255, green: 228/255, blue: 228/255, alpha: 1.0), alpha: 0.5, x: 0, y: 2, blur: 4, radius: 2.5, spread: 0)
-        self.wrapView.layer.cornerRadius = 18
+        self.wrapView.layer.cornerRadius = 0
     }
     
 }
@@ -483,7 +472,7 @@ class CookingCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.circleView.layer.borderWidth = 1
-        self.circleView.layer.borderColor = UIColor.init(red: 244/255, green: 146/255, blue: 158/255, alpha: 1.0).cgColor
+        self.circleView.layer.borderColor = UIColor.init(red: 161/255, green: 44/255, blue: 44/255, alpha: 1.0).cgColor
         self.circleView.layer.cornerRadius = self.circleView.frame.height/2
     }
 

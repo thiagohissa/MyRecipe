@@ -51,11 +51,11 @@ class CreateRecipeViewController: BaseViewController, UITextViewDelegate, UITabl
         self.bglayer.frame = self.view.frame
         self.backgroundView.layer.insertSublayer(bglayer, at: 0)
         // Xib Wrapper Edge
-        self.xibWrapView.layer.cornerRadius = 8
-        let maskPath = UIBezierPath(roundedRect: self.xibWrapView.bounds, byRoundingCorners: [.topLeft], cornerRadii: CGSize(width: 100, height: 100))
-        let shape = CAShapeLayer()
-        shape.path = maskPath.cgPath
-        self.xibWrapView.layer.mask = shape
+//        self.xibWrapView.layer.cornerRadius = 8
+//        let maskPath = UIBezierPath(roundedRect: self.xibWrapView.bounds, byRoundingCorners: [.topLeft], cornerRadii: CGSize(width: 100, height: 100))
+//        let shape = CAShapeLayer()
+//        shape.path = maskPath.cgPath
+//        self.xibWrapView.layer.mask = shape
         //Buttons
         for view in self.xibWrapView.subviews {
             if view is UIButton {

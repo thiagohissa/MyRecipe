@@ -28,7 +28,12 @@ class SearchViewController: BaseViewController, UITableViewDelegate, UITableView
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.arrayOfRecipes = DataManager.getRecipesFromCurrentUser()
+//        self.arrayOfRecipes = DataManager.getRecipesFromCurrentUser() // TODO: change to:
+        self.arrayOfRecipes = []
+        BackendManager.fetchRecipesFromDatabaseBySearching(key: "feed") { (array) in
+            self.arrayOfRecipes = array
+            self.tableView.reloadData()
+        }
         self.tableView.estimatedRowHeight = 180
         self.isNoResultsFound = false
         self.searchWrap.layer.applySketchShadow(color: UIColor.init(red: 228/255, green: 228/255, blue: 228/255, alpha: 1.0), alpha: 0.5, x: 0, y: 2, blur: 4, radius: 2.5, spread: 0)
@@ -116,6 +121,11 @@ class SearchViewController: BaseViewController, UITableViewDelegate, UITableView
         self.seeTapped(sender)
     }
     @IBAction func searchTapped(_ sender: UIButton) {
+        self.searchTextField.resignFirstResponder()
+        BackendManager.fetchRecipesFromDatabaseBySearching(key: self.searchTextField.text ?? "feed") { (array) in
+            self.arrayOfRecipes = array
+            self.tableView.reloadData()
+        }
     }
     
     func seeTapped(_ sender: UIButton) {

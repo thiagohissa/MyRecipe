@@ -88,7 +88,7 @@ class BackendManager: NSObject {
             recipe.briefDescription = "No description for this recipe"
         }
         
-        let dict = ["name" : recipe.name,
+        var dict = ["name" : recipe.name,
                     "cookingTime" : recipe.cookingTime,
                     "briefDescription" : recipe.briefDescription!,
                     "ingridients" : recipe.ingridients,
@@ -102,6 +102,8 @@ class BackendManager: NSObject {
                     "SHARED" : false,
                     "sharedBy" : "nil"] as [String : Any]
         Database.database().reference().child(BackendManager.shared.user.uid).child("recipes").child(recipe.name).updateChildValues(dict)
+        dict.updateValue(false, forKey: "FAVORITE")
+        Database.database().reference().child("recipes").child(recipe.name).updateChildValues(dict)
         BackendManager.shared.user.recipes?.append(recipe)
     }
     
@@ -197,6 +199,32 @@ class BackendManager: NSObject {
 
     }
     
+    
+    // MARK: Fetch recipes from database
+    class func fetchRecipesFromDatabaseBySearching(key: String, completion: @escaping (_ recipes: [Recipe]?)-> Void){
+        Database.database().reference().child("recipes").observe(.value, with: { (snap) in
+            if snap.exists() {
+                let value = snap.value as! NSDictionary
+                var arrayOfRecipes: [Recipe] = []
+                for recipe in value {
+                    let new_recipe = Recipe.init(dict: recipe.value as! NSDictionary)
+                    arrayOfRecipes.append(new_recipe)
+                }
+                if key == "feed" {
+                    completion(arrayOfRecipes)
+                }
+                else {
+                    var arrayOfSearchedRecipes: [Recipe] = []
+                    for recipe in arrayOfRecipes {
+                        if recipe.name.lowercased().range(of: key) != nil {
+                            arrayOfSearchedRecipes.append(recipe)
+                        }
+                    }
+                    completion(arrayOfSearchedRecipes)
+                }
+            }
+        })
+    }
     
     
     

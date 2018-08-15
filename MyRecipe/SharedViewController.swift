@@ -10,7 +10,6 @@ import UIKit
 
 class SharedViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var xibWrapView: UIView!
-    @IBOutlet weak var backgroundView: UIView!
     @IBOutlet weak var tableView: UITableView!
     var arrayOfRecipes: [Recipe]!
     var bglayer: CAGradientLayer!
@@ -24,16 +23,14 @@ class SharedViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func prepareUI(){
         // BG Color
         let gradientcolor = Color.init(top: UIColor.init(red: 254/255, green: 184/255, blue: 141/255, alpha: 0.8), bottom: UIColor.init(red: 246/255, green: 133/255, blue: 148/255, alpha: 0.8))
-        self.backgroundView.backgroundColor = UIColor.clear
         self.bglayer = gradientcolor.gl
         self.bglayer.frame = self.view.frame
-        self.backgroundView.layer.insertSublayer(bglayer, at: 0)
         // Xib Wrapper Edge
-        self.xibWrapView.layer.cornerRadius = 8
-        let maskPath = UIBezierPath(roundedRect: self.xibWrapView.bounds, byRoundingCorners: [.topLeft], cornerRadii: CGSize(width: 100, height: 100))
-        let shape = CAShapeLayer()
-        shape.path = maskPath.cgPath
-        self.xibWrapView.layer.mask = shape
+//        self.xibWrapView.layer.cornerRadius = 8
+//        let maskPath = UIBezierPath(roundedRect: self.xibWrapView.bounds, byRoundingCorners: [.topLeft], cornerRadii: CGSize(width: 100, height: 100))
+//        let shape = CAShapeLayer()
+//        shape.path = maskPath.cgPath
+//        self.xibWrapView.layer.mask = shape
     }
     
     //MARK: TableView

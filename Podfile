@@ -12,6 +12,7 @@ pod 'Firebase/Auth'
 pod 'Firebase/Database'
 pod 'Firebase/Storage'
 pod 'IQKeyboardManagerSwift'
+pod 'Alamofire', '~> 4.7'
 
   target 'MyRecipeTests' do
     inherit! :search_paths
