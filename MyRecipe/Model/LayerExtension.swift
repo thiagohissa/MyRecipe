@@ -21,12 +21,6 @@ extension CALayer {
         shadowColor = color.cgColor
         shadowOpacity = alpha
         shadowOffset = CGSize(width: x, height: y)
-        //        if blur != 0 {
-        //            shadowRadius = blur / 2.0
-        //        }
-        //        else{
-        //            shadowRadius = radius
-        //        }
         shadowRadius = radius
         if spread == 0 {
             shadowPath = nil

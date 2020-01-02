@@ -186,8 +186,6 @@ class SearchViewController: BaseViewController, UITableViewDelegate, UITableView
     
     //MARK: Search
     func searchString(string: String) {
-        // search for word function should return an arrayOfRecipes
-        // make self.arrayOfRecipes = arrayOfRecipes returned by function
         if self.arrayOfRecipes.count == 0 || self.arrayOfRecipes == nil {
             self.isNoResultsFound = true
         }
@@ -249,8 +247,6 @@ class SearchCell: UITableViewCell {
     @IBOutlet weak var wrapView: UIView!
     
     override func awakeFromNib() {
-        self.wrapView.layer.applySketchShadow(color: UIColor.init(red: 228/255, green: 228/255, blue: 228/255, alpha: 1.0), alpha: 0.5, x: 0, y: 2, blur: 4, radius: 2.5, spread: 0)
-        self.wrapView.layer.cornerRadius = 18
         self.saveButton.layer.cornerRadius = 14
         self.detailsButton.layer.cornerRadius = 14
         self.saveButton.layer.applySketchShadow(color: UIColor.init(red: 228/255, green: 228/255, blue: 228/255, alpha: 1.0), alpha: 0.5, x: 0, y: 2, blur: 4, radius: 2.5, spread: 0)

@@ -25,12 +25,6 @@ class SharedViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let gradientcolor = Color.init(top: UIColor.init(red: 254/255, green: 184/255, blue: 141/255, alpha: 0.8), bottom: UIColor.init(red: 246/255, green: 133/255, blue: 148/255, alpha: 0.8))
         self.bglayer = gradientcolor.gl
         self.bglayer.frame = self.view.frame
-        // Xib Wrapper Edge
-//        self.xibWrapView.layer.cornerRadius = 8
-//        let maskPath = UIBezierPath(roundedRect: self.xibWrapView.bounds, byRoundingCorners: [.topLeft], cornerRadii: CGSize(width: 100, height: 100))
-//        let shape = CAShapeLayer()
-//        shape.path = maskPath.cgPath
-//        self.xibWrapView.layer.mask = shape
     }
     
     //MARK: TableView
@@ -111,8 +105,10 @@ class SharedCell: UITableViewCell {
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var sentByLabel: UILabel!
+    @IBOutlet weak var wrap: UIView!
     
     override func awakeFromNib() {
+        self.wrap.layer.applySketchShadow(color: UIColor.init(red: 228/255, green: 228/255, blue: 228/255, alpha: 1.0), alpha: 0.5, x: 0, y: 2, blur: 4, radius: 2.5, spread: 0)
         self.saveButton.layer.cornerRadius = 15
     }
 }

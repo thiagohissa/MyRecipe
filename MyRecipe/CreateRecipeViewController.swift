@@ -11,10 +11,9 @@ import UIKit
 class CreateRecipeViewController: BaseViewController, UITextViewDelegate, UITableViewDelegate, UITableViewDataSource {
 
     //MARK: Properties
-    @IBOutlet weak var backgroundView: UIView!
     @IBOutlet weak var xibWrapView: UIView!
     @IBOutlet weak var ingridientTextField: TextField!
-    @IBOutlet weak var stepsTextView: UITextView!
+    @IBOutlet weak var stepsTextField: TextField!
     @IBOutlet weak var okButton: UIButton!
     @IBOutlet weak var wrapTablePopup: UIView!
     @IBOutlet weak var previewTable: UITableView!
@@ -39,24 +38,15 @@ class CreateRecipeViewController: BaseViewController, UITextViewDelegate, UITabl
     override func viewDidLoad() {
         super.viewDidLoad()
         self.prepareUI()
-        self.stepsTextView.delegate = self
         self.isIngridients = true
     }
     
     func prepareUI(){
         // BG Color
         let gradientcolor = Color.init(top: UIColor.init(red: 254/255, green: 184/255, blue: 141/255, alpha: 0.8), bottom: UIColor.init(red: 246/255, green: 133/255, blue: 148/255, alpha: 0.8))
-        self.backgroundView.backgroundColor = UIColor.clear
         self.bglayer = gradientcolor.gl
         self.bglayer.frame = self.view.frame
-        self.backgroundView.layer.insertSublayer(bglayer, at: 0)
         // Xib Wrapper Edge
-//        self.xibWrapView.layer.cornerRadius = 8
-//        let maskPath = UIBezierPath(roundedRect: self.xibWrapView.bounds, byRoundingCorners: [.topLeft], cornerRadii: CGSize(width: 100, height: 100))
-//        let shape = CAShapeLayer()
-//        shape.path = maskPath.cgPath
-//        self.xibWrapView.layer.mask = shape
-        //Buttons
         for view in self.xibWrapView.subviews {
             if view is UIButton {
                 view.layer.cornerRadius = 18
@@ -70,12 +60,9 @@ class CreateRecipeViewController: BaseViewController, UITextViewDelegate, UITabl
         self.recipeNameTextField.attributedPlaceholder = NSAttributedString.init(string: "Recipe name", attributes: [NSAttributedStringKey.foregroundColor: UIColor.gray])
         self.cookingtimeTextField.attributedPlaceholder = NSAttributedString.init(string: "Cooking time in minutes", attributes: [NSAttributedStringKey.foregroundColor: UIColor.gray])
         self.ingridientTextField.attributedPlaceholder = NSAttributedString.init(string: "Enter Ingridient here", attributes: [NSAttributedStringKey.foregroundColor: UIColor.gray])
-        self.tagTextField.attributedPlaceholder = NSAttributedString.init(string: "Tags  (Optional)", attributes: [NSAttributedStringKey.foregroundColor: UIColor.gray])
-        self.descriptionTextField.attributedPlaceholder = NSAttributedString.init(string: "Brief Description  (Optional)", attributes: [NSAttributedStringKey.foregroundColor: UIColor.gray])
-        self.stepsTextView.layer.applySketchShadow(color: UIColor.init(red: 228/255, green: 228/255, blue: 228/255, alpha: 1.0), alpha: 0.5, x: 0, y: 2, blur: 4, radius: 2.5, spread: 5)
-        self.stepsTextView.layer.cornerRadius = 18
-        self.stepsTextView.text = "Enter Step Here"
-        self.stepsTextView.textColor = UIColor.lightGray
+        self.tagTextField.attributedPlaceholder = NSAttributedString.init(string: "Tags  -  Optional", attributes: [NSAttributedStringKey.foregroundColor: UIColor.gray])
+        self.descriptionTextField.attributedPlaceholder = NSAttributedString.init(string: "Brief Description  -  Optional", attributes: [NSAttributedStringKey.foregroundColor: UIColor.gray])
+        self.stepsTextField.attributedPlaceholder = NSAttributedString.init(string: "Enter Step Here", attributes: [NSAttributedStringKey.foregroundColor: UIColor.gray])
         // TableView
         self.wrapTablePopup.layer.cornerRadius = 18
         self.previewTable.estimatedRowHeight = 120
@@ -160,13 +147,12 @@ class CreateRecipeViewController: BaseViewController, UITextViewDelegate, UITabl
             self.ingridientTextField.text = nil
         }
         else{
-            if self.stepsTextView.text == "Enter Step Here" {
+            if (self.stepsTextField.text?.isEmpty)! {
                 super.presentAlert(title: "EMPTY FIELD", message: "Please make sure you have entered all required fields")
                 return
             }
             // add to step array
-            self.arrayOfSteps.append(self.stepsTextView.text!)
-            self.stepsTextView.text = nil
+            self.arrayOfSteps.append(self.stepsTextField.text!)
         }
     }
     
@@ -267,19 +253,19 @@ class CreateRecipeViewController: BaseViewController, UITextViewDelegate, UITabl
     
     
     //MARK :TextField Delegate
-    func textViewDidBeginEditing(_ textView: UITextView) {
-        if self.stepsTextView.textColor == UIColor.lightGray {
-            self.stepsTextView.text = nil
-            self.stepsTextView.textColor = UIColor.black
-        }
-    }
-    
-    func textViewDidEndEditing(_ textView: UITextView) {
-        if self.stepsTextView.text.isEmpty {
-            self.stepsTextView.text = "Enter Step Here"
-            self.stepsTextView.textColor = UIColor.lightGray
-        }
-    }
+//    func textViewDidBeginEditing(_ textView: UITextView) {
+//        if self.stepsTextView.textColor == UIColor.lightGray {
+//            self.stepsTextView.text = nil
+//            self.stepsTextView.textColor = UIColor.black
+//        }
+//    }
+//
+//    func textViewDidEndEditing(_ textView: UITextView) {
+//        if self.stepsTextView.text.isEmpty {
+//            self.stepsTextView.text = "Enter Step Here"
+//            self.stepsTextView.textColor = UIColor.lightGray
+//        }
+//    }
     
     //MARK: Preview animation
     func presentPreview(){
@@ -287,7 +273,7 @@ class CreateRecipeViewController: BaseViewController, UITextViewDelegate, UITabl
             self.previewTitle.text = "INGRIDIENTS"
         } else { self.previewTitle.text = "STEPS" }
         self.ingridientTextField.endEditing(true)
-        self.stepsTextView.endEditing(true)
+        self.stepsTextField.endEditing(true)
         self.previewTable.reloadData()
         self.wrapTablePopup.center.x = self.view.center.x
         self.wrapTablePopup.isHidden = false

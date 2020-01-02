@@ -23,9 +23,9 @@
             <rect key="frame" x="0.0" y="0.0" width="351" height="310"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wXi-Bl-5pG">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wXi-Bl-5pG" customClass="ColorButton" customModule="MyRecipe" customModuleProvider="target">
                     <rect key="frame" x="16" y="263" width="319" height="35"/>
-                    <color key="backgroundColor" red="0.94509803921568625" green="0.5725490196078431" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.63137254901960782" green="0.17254901960784313" blue="0.17254901960784313" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="35" id="B7g-wf-h40"/>
                     </constraints>

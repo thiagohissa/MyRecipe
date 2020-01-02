@@ -289,28 +289,6 @@ class RecipesViewController: UIViewController, UITableViewDataSource, UITableVie
         self.presentTimerPopUp()
     }
     
-//    @IBAction func refreshTapped(_ sender: UIButton) {
-//        // TODO: Animate button (make it rotate while fetching new recipes)
-//        UIView.animate(withDuration: 1, delay: 0, options: .repeat, animations: {
-//            self.refreshButton.transform = CGAffineTransform(rotationAngle: 360)
-//        }, completion: nil)
-//        UIView.animate(withDuration: 1, animations: {
-//            self.tableView.alpha = 0
-//        })
-//        // TODO: it shouldnt be necessary to call a function. Make sure after each BackendManager call, we update the BackendManager.shared.user.recipes array
-//        BackendManager.getRecipesForCurrentUser { (arrayOfRecipes) in
-//            self.arrayOfRecipes = arrayOfRecipes
-//            self.tableView.reloadData()
-//            UIView.animate(withDuration: 1.5, animations: {
-//                self.tableView.alpha = 1
-//            })
-//            DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
-//                self.refreshButton.layer.removeAllAnimations()
-//            })
-//        }
-//    }
-    
-    
     //MARK: Timer
     @objc func presentTimerPopUp(){
         self.timerPopUp.center.x = self.view.center.x
